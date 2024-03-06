@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
 
+    private Button createShoppingListButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         readProductData();
         readShelfData();
-        //setUpList();
-        //setUpOnclickListener();
-        //initSearchWidgets();
     }
 
     private void initSearchWidgets() {
@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.ShoppingList) {
             setContentView(R.layout.shopping_list_layout);
+            createShoppingListButton = (Button)findViewById(R.id.createShoppingListButton);
+            createShoppingListButton.setOnClickListener((View.OnClickListener) this);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -17,7 +17,7 @@ public class ShelfClass {
         ypos = 0;
     }
     public ShelfClass(int shelfID, int aisleNo, String side, int shelfNo, int xpos, int ypos) {
-        shelfID = shelfID;
+        this.shelfID = shelfID;
         this.aisleNo = aisleNo;
         this.side = side;
         this.shelfNo = shelfNo;
