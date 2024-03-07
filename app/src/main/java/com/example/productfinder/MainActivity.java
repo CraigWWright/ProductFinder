@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -17,22 +18,31 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static ArrayList<ProductClass> productClassList = new ArrayList<ProductClass>();
     public static ArrayList<ShelfClass> shelfClassList = new ArrayList<ShelfClass>();
+    public static ArrayList<ProductClass> shoppingList = new ArrayList<>();
 
     private ListView productListView;
 
     private ListView createShoppingListView;
+    private ListView shoppingListFileView;
     private Button createShoppingListButton;
     private Button submitShoppingListButton;
+
+    private ArrayList<String> fileNamesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +73,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 ProductAdapter adapter = new ProductAdapter(getApplicationContext(), 0, filteredProducts);
                 productListView.setAdapter(adapter);
+
+                return false;
+            }
+        });
+    }
+
+    private void initSearchWidgetsForShoppingList() {
+        SearchView searchView = (SearchView) findViewById(R.id.shoppingListSearch);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<ProductClass> filteredProducts = new ArrayList<ProductClass>();
+                for (ProductClass productClass: productClassList) {
+                    if (productClass.getProductName().toLowerCase().contains(newText.toLowerCase())){
+                        filteredProducts.add(productClass);
+                    }
+                }
+
+                ShoppingListAdapter adapter = new ShoppingListAdapter(getApplicationContext(), 0, filteredProducts);
+                createShoppingListView.setAdapter(adapter);
 
                 return false;
             }
@@ -130,6 +166,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         productListView.setAdapter(adapter);
     }
 
+    private void setUpFileList() {
+
+        ListView shoppingListFileView = findViewById(R.id.shoppingListFileView);
+
+        List<String> fileList = getFileList();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileList);
+        shoppingListFileView.setAdapter(adapter);
+
+    }
+
+    private void loadData() {
+
+    }
+
+    private List<String> getFileList() {
+        List<String> fileList = new ArrayList<>();
+        File directory = new File(getFilesDir(), "Documents");
+        if (directory.exists()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    fileList.add(file.getName());
+                }
+            } else {
+                Log.e("FileListActivity", "No files found in the directory.");
+            }
+        } else {
+            Log.e("FileListActivity", "Directory does not exist.");
+        }
+        return fileList;
+    }
+
+
     private void setUpOnclickListener()
     {
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -167,16 +237,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setContentView(R.layout.shopping_list_layout);
             createShoppingListButton = (Button)findViewById(R.id.createShoppingListButton);
             createShoppingListButton.setOnClickListener(this);
+            //setUpFileList();
+            //loadData();
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNamesList);
+            shoppingListFileView = findViewById(R.id.shoppingListFileView);
+            shoppingListFileView.setAdapter(adapter);
+            handleFileNameClick();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void handleFileNameClick() {
+        shoppingListFileView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String filename = (String) shoppingListFileView.getItemAtPosition(position);
+                File file = getApplicationContext().getFileStreamPath(filename);
+                String lineFromFile;
+
+                if (file.exists()) {
+                    try {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput(filename)));
+
+                        while ((lineFromFile = reader.readLine()) != null) {
+                            StringTokenizer tokenizer = new StringTokenizer(lineFromFile, ",");
+                            Log.d("Message", tokenizer.nextToken());
+                            for (ProductClass productClass : productClassList) {
+                                Log.d("Message", "Hello");
+                                /*Log.d("Message", productClass.getProductName());
+                                if (tokenizer.nextToken().equals(productClass.getProductID())) {
+                                    shoppingList.add(productClass);
+                                }
+
+                                 */
+                            }
+                            //int size = shoppingList.size();
+
+                            //for (int i = 0; i<size; i++) {
+                            //    Log.d("Message", shoppingList.get(i).getProductName());
+                            //}
+
+
+                        }
+                        reader.close();
+                        setContentView(R.layout.shopping_list_play_layout);
+                    } catch (IOException e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT);
+                    }
+                }
+            }
+        });
+    }
+
     public void onClick(View aview) {
         if (aview == createShoppingListButton) {
             setContentView(R.layout.create_shopping_list_layout);
-            //Log.d("Message", String.valueOf(productClassList.get(5).isChecked()));
-
 
             createShoppingListView = findViewById(R.id.shoppingListView);
             ShoppingListAdapter adapter = new ShoppingListAdapter(this, 0, productClassList);
@@ -187,17 +304,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             submitShoppingListButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    EditText enteredFilename = findViewById(R.id.userFilename);
+                    String filename = enteredFilename.getText().toString();
                     StringBuilder selectedProducts = new StringBuilder();
+                    /*
                     for (ProductClass product : productClassList) {
                         if (product.isChecked()) {
-                            selectedProducts.append(product.getProductName()).append(", ");
+                            selectedProducts.append(product.getProductID()).append(", ");
                         }
                     }
-                    Log.d("Message", String.valueOf(selectedProducts));
+
+                     */
+                    //CSVWriter.saveStringAsCSV(getApplicationContext(), String.valueOf(selectedProducts), filename);
+                    try {
+                        FileOutputStream file = openFileOutput(filename + ".txt", MODE_PRIVATE);
+                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(file);
+                        for (ProductClass product : productClassList) {
+                            if (product.isChecked()) {
+                                outputStreamWriter.write(product.getProductID() + "," + "\n");
+                            }
+                        }
+                        outputStreamWriter.flush();
+                        outputStreamWriter.close();
+
+                        fileNamesList.add(filename + ".txt");
+
+                        Toast.makeText(MainActivity.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
+
+                    } catch (IOException e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    setContentView(R.layout.shopping_list_layout);
+                    adapter.notifyDataSetChanged();
                 }
             });
-            initSearchWidgets();
-
+            initSearchWidgetsForShoppingList();
 
         }
     }
