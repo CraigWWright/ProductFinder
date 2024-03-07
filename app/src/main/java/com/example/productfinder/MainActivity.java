@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
@@ -21,14 +23,16 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static ArrayList<ProductClass> productClassList = new ArrayList<ProductClass>();
     public static ArrayList<ShelfClass> shelfClassList = new ArrayList<ShelfClass>();
 
-    private ListView listView;
+    private ListView productListView;
 
+    private ListView createShoppingListView;
     private Button createShoppingListButton;
+    private Button submitShoppingListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 ProductAdapter adapter = new ProductAdapter(getApplicationContext(), 0, filteredProducts);
-                listView.setAdapter(adapter);
+                productListView.setAdapter(adapter);
 
                 return false;
             }
@@ -120,19 +124,19 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setUpList() {
 
-        listView = (ListView) findViewById(R.id.productListView);
+        productListView = (ListView) findViewById(R.id.productListView);
 
         ProductAdapter adapter = new ProductAdapter(getApplicationContext(), 0, productClassList);
-        listView.setAdapter(adapter);
+        productListView.setAdapter(adapter);
     }
 
     private void setUpOnclickListener()
     {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
             {
-                ProductClass selectProduct = (ProductClass) (listView.getItemAtPosition(position));
+                ProductClass selectProduct = (ProductClass) (productListView.getItemAtPosition(position));
                 Intent showDetail = new Intent(getApplicationContext(), DetailActivity.class);
                 showDetail.putExtra("id",selectProduct.getProductID());
                 startActivity(showDetail);
@@ -162,10 +166,40 @@ public class MainActivity extends AppCompatActivity {
         } else if (itemId == R.id.ShoppingList) {
             setContentView(R.layout.shopping_list_layout);
             createShoppingListButton = (Button)findViewById(R.id.createShoppingListButton);
-            createShoppingListButton.setOnClickListener((View.OnClickListener) this);
+            createShoppingListButton.setOnClickListener(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View aview) {
+        if (aview == createShoppingListButton) {
+            setContentView(R.layout.create_shopping_list_layout);
+            //Log.d("Message", String.valueOf(productClassList.get(5).isChecked()));
+
+
+            createShoppingListView = findViewById(R.id.shoppingListView);
+            ShoppingListAdapter adapter = new ShoppingListAdapter(this, 0, productClassList);
+            createShoppingListView.setAdapter(adapter);
+
+
+            submitShoppingListButton = findViewById(R.id.submitButton);
+            submitShoppingListButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringBuilder selectedProducts = new StringBuilder();
+                    for (ProductClass product : productClassList) {
+                        if (product.isChecked()) {
+                            selectedProducts.append(product.getProductName()).append(", ");
+                        }
+                    }
+                    Log.d("Message", String.valueOf(selectedProducts));
+                }
+            });
+            initSearchWidgets();
+
+
+        }
     }
 
 }

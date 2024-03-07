@@ -7,6 +7,7 @@ public class ProductClass {
 
     private String shelfRow;
     private int shelfID;
+    private boolean isChecked;
 
 
     public ProductClass() {
@@ -14,6 +15,7 @@ public class ProductClass {
         productName = "";
         shelfRow = "";
         shelfID = 0;
+        isChecked = false;
     }
 
     public ProductClass(String anId, String aProductName, String aShelfRow, int aShelfID) {
@@ -21,6 +23,7 @@ public class ProductClass {
         productName = aProductName;
         shelfRow = aShelfRow;
         shelfID = aShelfID;
+        isChecked = false;
     }
 
     public String getProductID() {return productID;}
@@ -38,4 +41,12 @@ public class ProductClass {
     public int getShelfID() {return shelfID;}
 
     public void setShelfID(int aShelfID) {shelfID = aShelfID;}
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 }
