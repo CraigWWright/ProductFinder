@@ -2,17 +2,46 @@
     <LinearLayout
         android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Search"
+            android:textSize="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="Scroll through this list or use the\n search bar to find the product you are\n looking for. You can the click on\n the product and find more details."/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="20dp"/>
+
         <SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/productSearch"
             android:iconifiedByDefault="false"
-            android:queryHint="Product Name"/>
+            android:queryHint="Product Name"
+            android:layout_marginTop="20dp"/>
 
         <ListView
             android:id="@+id/productListView"
             android:layout_width="match_parent"
-            android:layout_height="520dp" />
+            android:layout_height="654dp" />
 
     </LinearLayout>
 </ScrollView>

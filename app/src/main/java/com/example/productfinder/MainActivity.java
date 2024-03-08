@@ -19,7 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static ArrayList<ProductClass> productClassList = new ArrayList<ProductClass>();
     public static ArrayList<ShelfClass> shelfClassList = new ArrayList<ShelfClass>();
-    public static ArrayList<ProductClass> shoppingList = new ArrayList<>();
+    public static ArrayList<ProductClass> shoppingList = new ArrayList<ProductClass>();
 
     private ListView productListView;
 
@@ -257,35 +259,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 File file = getApplicationContext().getFileStreamPath(filename);
                 String lineFromFile;
 
-                if (file.exists()) {
-                    try {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput(filename)));
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(filename));
+                    String line="";
+                    while ((line = reader.readLine()) != null) {
+                        String[] tokens = line.split(",");
 
-                        while ((lineFromFile = reader.readLine()) != null) {
-                            StringTokenizer tokenizer = new StringTokenizer(lineFromFile, ",");
-                            Log.d("Message", tokenizer.nextToken());
-                            for (ProductClass productClass : productClassList) {
-                                Log.d("Message", "Hello");
-                                /*Log.d("Message", productClass.getProductName());
-                                if (tokenizer.nextToken().equals(productClass.getProductID())) {
-                                    shoppingList.add(productClass);
-                                }
-
-                                 */
-                            }
-                            //int size = shoppingList.size();
-
-                            //for (int i = 0; i<size; i++) {
-                            //    Log.d("Message", shoppingList.get(i).getProductName());
-                            //}
-
-
-                        }
-                        reader.close();
-                        setContentView(R.layout.shopping_list_play_layout);
-                    } catch (IOException e) {
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT);
+                        ProductClass productClass = new ProductClass();
+                        productClass.setProductID(tokens[0]);
+                        shoppingList.add(productClass);
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                for (ProductClass productClass : shoppingList) {
+                    Log.d("MEssage", productClass.getProductName());
                 }
             }
         });
