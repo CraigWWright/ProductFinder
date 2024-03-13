@@ -17,17 +17,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -44,7 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button createShoppingListButton;
     private Button submitShoppingListButton;
 
-    private ArrayList<String> fileNamesList = new ArrayList<>();
+    //private ArrayList<String> fileNamesList = new ArrayList<>();
+
+    private static final String shoppingListFileNames = "shoppingListFileNames.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,10 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             createShoppingListButton.setOnClickListener(this);
             //setUpFileList();
             //loadData();
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNamesList);
-            shoppingListFileView = findViewById(R.id.shoppingListFileView);
-            shoppingListFileView.setAdapter(adapter);
+            handleShowCreatedShoppingLists();
             handleFileNameClick();
             return true;
         }
@@ -274,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 for (ProductClass productClass : shoppingList) {
-                    Log.d("MEssage", productClass.getProductName());
+                    Log.d("Message", productClass.getProductName());
                 }
             }
         });
@@ -294,8 +300,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onClick(View v) {
                     EditText enteredFilename = findViewById(R.id.userFilename);
-                    String filename = enteredFilename.getText().toString();
-                    StringBuilder selectedProducts = new StringBuilder();
+                    String shoppingListName = enteredFilename.getText().toString();
+                    String shoppingListFile = shoppingListName + ".txt";
+
+                    try {
+                        FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
+                        for (ProductClass product : productClassList) {
+                            if (product.isChecked()) {
+                                fileOutputStream.write((product.getProductID() + "," + "\n").getBytes());
+                            }
+                        }
+                        fileOutputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ///////////////////
+                    ////////////////
+                    String input = "";
+                    try {
+                        FileInputStream fis = new FileInputStream(new File(getFilesDir(), shoppingListFile));
+                        BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
+                        StringBuffer stringBuffer = new StringBuffer();
+                        while (bufferedInputStream.available() != 0) {
+                            char c = (char) bufferedInputStream.read();
+                            stringBuffer.append(c);
+                        }
+                        bufferedInputStream.close();
+                        fis.close();
+                        input = stringBuffer.toString();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("Message", input);
+
+
+                    //////////////////
+                    /////////////////
+
+                    shoppingListName = shoppingListName + ",";
+
+                    try {
+                        FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFileNames), true);
+                        fileOutputStream.write(shoppingListName.getBytes());
+                        fileOutputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    setContentView(R.layout.shopping_list_layout);
+                    handleShowCreatedShoppingLists();
                     /*
                     for (ProductClass product : productClassList) {
                         if (product.isChecked()) {
@@ -305,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                      */
                     //CSVWriter.saveStringAsCSV(getApplicationContext(), String.valueOf(selectedProducts), filename);
+                    /*
                     try {
                         FileOutputStream file = openFileOutput(filename + ".txt", MODE_PRIVATE);
                         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(file);
@@ -325,11 +380,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     setContentView(R.layout.shopping_list_layout);
                     adapter.notifyDataSetChanged();
+
+                     */
                 }
             });
             initSearchWidgetsForShoppingList();
 
         }
+    }
+
+    public void handleShowCreatedShoppingLists() {
+        String input="";
+        try {
+            FileInputStream fis = new FileInputStream(new File(getFilesDir(), shoppingListFileNames));
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
+            StringBuffer stringBuffer = new StringBuffer();
+            while (bufferedInputStream.available() != 0) {
+                char c = (char) bufferedInputStream.read();
+                stringBuffer.append(c);
+            }
+            bufferedInputStream.close();
+            fis.close();
+            input = stringBuffer.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> fileNamesList = new ArrayList<>(Arrays.asList(input.split(",")));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNamesList);
+        shoppingListFileView = findViewById(R.id.shoppingListFileView);
+        shoppingListFileView.setAdapter(adapter);
     }
 
 }
