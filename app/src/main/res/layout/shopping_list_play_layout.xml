@@ -18,7 +18,7 @@
         app:zoomage_restrictBounds="true" />
 
     <TextView
-        android:id="@+id/productName"
+        android:id="@+id/shopping_list_product_details"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="250dp"
@@ -26,6 +26,32 @@
         android:gravity="center_vertical"
         android:text="product name"
         android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/shopping_list_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="700dp"
+        android:gravity="center_vertical"
+        android:text="0/0"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/previous_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="700dp"
+        android:layout_marginLeft="25dp"
+        android:text="Previous" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="700dp"
+        android:layout_marginLeft="300dp"
+        android:text="Next" />
 
 
 </RelativeLayout>

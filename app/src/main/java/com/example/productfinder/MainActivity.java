@@ -6,38 +6,29 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ListView shoppingListFileView;
     private Button createShoppingListButton;
     private Button submitShoppingListButton;
+    private int currentIndex = 0;
+
+    private TextView productDetails;
+    private Button nextButton;
+    private Button previousButton;
+    private TextView shoppingListCounter;
 
     //private ArrayList<String> fileNamesList = new ArrayList<>();
 
@@ -366,30 +363,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         shoppingListFileView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String filename =  (String) shoppingListFileView.getItemAtPosition(position);
-                filename = filename + ".txt";
+                loadShoppingList(position);
+                setContentView(R.layout.shopping_list_play_layout);
 
-                File file = getApplicationContext().getFileStreamPath(filename);
+                currentIndex = 0;
 
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                    String line ="";
-                    while ((line = bufferedReader.readLine()) != null) {
-                        String[] tokens = line.split(",");
+                productDetails = findViewById(R.id.shopping_list_product_details);
+                shoppingListCounter = findViewById(R.id.shopping_list_counter);
+                nextButton = findViewById(R.id.next_button);
+                previousButton = findViewById(R.id.previous_button);
 
-                        ProductClass productClass = new ProductClass();
-                        productClass.setProductID(tokens[0]);
-                        productClass.setProductName(tokens[1]);
-                        productClass.setShelfRow(tokens[2]);
-                        productClass.setShelfID(Integer.parseInt(tokens[3]));
-                        shoppingList.add(productClass);
+                shoppingListDisplayProduct();
+                String counterText = (currentIndex+1) + "/" + shoppingList.size();
+                shoppingListCounter.setText(counterText);
+
+                nextButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentIndex =(currentIndex + 1) % shoppingList.size();
+                        String counterText = (currentIndex+1) + "/" + shoppingList.size();
+                        shoppingListCounter.setText(counterText);
+                        shoppingListDisplayProduct();
                     }
-                    bufferedReader.close();
+                });
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                previousButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentIndex =(currentIndex - 1) % shoppingList.size();
+                        String counterText = (currentIndex+1) + "/" + shoppingList.size();
+                        shoppingListCounter.setText(counterText);
+                        shoppingListDisplayProduct();
+                    }
+                });
             }
         });
+    }
+
+    public void loadShoppingList(int position) {
+        String filename =  (String) shoppingListFileView.getItemAtPosition(position);
+        filename = filename + ".txt";
+
+        File file = getApplicationContext().getFileStreamPath(filename);
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line ="";
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+                ProductClass productClass = new ProductClass();
+                productClass.setProductID(tokens[0]);
+                productClass.setProductName(tokens[1]);
+                productClass.setShelfRow(tokens[2]);
+                productClass.setShelfID(Integer.parseInt(tokens[3]));
+                shoppingList.add(productClass);
+            }
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void shoppingListDisplayProduct() {
+        ProductClass productClass = shoppingList.get(currentIndex);
+
+        String location = productClass.getProductName() + " can be found in: \nAisle: " + shelfClassList.get(productClass.getShelfID()-1).getAisleNo()
+                + "\nSide: " + shelfClassList.get(productClass.getShelfID()-1).getSide() + "\nShelf: " + shelfClassList.get(productClass.getShelfID()-1).getShelfNo()
+                ;
+
+        productDetails.setText(location);
+
+
     }
 }
