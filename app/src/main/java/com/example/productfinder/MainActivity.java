@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -137,10 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 productClass.setShelfRow(tokens[2]);
                 productClass.setShelfID(Integer.parseInt(tokens[3]));
                 productClassList.add(productClass);
-
             }
         } catch (IOException e) {
-            //Log.wtf("MyActivity", "Error reading data file on line" + line, e);
             e.printStackTrace();
         }
     }
@@ -251,7 +250,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //setUpFileList();
             //loadData();
             handleShowCreatedShoppingLists();
-            handleFileNameClick();
+            //handleFileNameClick();
+            handleShoppingListViewClick();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -307,36 +307,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
                         for (ProductClass product : productClassList) {
                             if (product.isChecked()) {
-                                fileOutputStream.write((product.getProductID() + "," + "\n").getBytes());
+                                fileOutputStream.write((product.getProductID() + "," + product.getProductName() + "," + product.getShelfRow() + "," + product.getShelfID() + "," +"\n").getBytes());
+                                product.setChecked(false);
                             }
                         }
                         fileOutputStream.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    ///////////////////
-                    ////////////////
-                    String input = "";
-                    try {
-                        FileInputStream fis = new FileInputStream(new File(getFilesDir(), shoppingListFile));
-                        BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
-                        StringBuffer stringBuffer = new StringBuffer();
-                        while (bufferedInputStream.available() != 0) {
-                            char c = (char) bufferedInputStream.read();
-                            stringBuffer.append(c);
-                        }
-                        bufferedInputStream.close();
-                        fis.close();
-                        input = stringBuffer.toString();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Log.d("Message", input);
-
-
-                    //////////////////
-                    /////////////////
+                    
 
                     shoppingListName = shoppingListName + ",";
 
@@ -348,40 +327,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         e.printStackTrace();
                     }
 
+
                     setContentView(R.layout.shopping_list_layout);
                     handleShowCreatedShoppingLists();
-                    /*
-                    for (ProductClass product : productClassList) {
-                        if (product.isChecked()) {
-                            selectedProducts.append(product.getProductID()).append(", ");
-                        }
-                    }
-
-                     */
-                    //CSVWriter.saveStringAsCSV(getApplicationContext(), String.valueOf(selectedProducts), filename);
-                    /*
-                    try {
-                        FileOutputStream file = openFileOutput(filename + ".txt", MODE_PRIVATE);
-                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(file);
-                        for (ProductClass product : productClassList) {
-                            if (product.isChecked()) {
-                                outputStreamWriter.write(product.getProductID() + "," + "\n");
-                            }
-                        }
-                        outputStreamWriter.flush();
-                        outputStreamWriter.close();
-
-                        fileNamesList.add(filename + ".txt");
-
-                        Toast.makeText(MainActivity.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
-
-                    } catch (IOException e) {
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                    setContentView(R.layout.shopping_list_layout);
-                    adapter.notifyDataSetChanged();
-
-                     */
                 }
             });
             initSearchWidgetsForShoppingList();
@@ -410,6 +358,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNamesList);
         shoppingListFileView = findViewById(R.id.shoppingListFileView);
         shoppingListFileView.setAdapter(adapter);
+        handleShoppingListViewClick();
     }
 
+
+    public void handleShoppingListViewClick() {
+        shoppingListFileView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String filename =  (String) shoppingListFileView.getItemAtPosition(position);
+                filename = filename + ".txt";
+
+                File file = getApplicationContext().getFileStreamPath(filename);
+
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                    String line ="";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        String[] tokens = line.split(",");
+
+                        ProductClass productClass = new ProductClass();
+                        productClass.setProductID(tokens[0]);
+                        productClass.setProductName(tokens[1]);
+                        productClass.setShelfRow(tokens[2]);
+                        productClass.setShelfID(Integer.parseInt(tokens[3]));
+                        shoppingList.add(productClass);
+                    }
+                    bufferedReader.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

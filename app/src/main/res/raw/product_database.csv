@@ -1,310 +1,310 @@
-1,Flowers,0,49,,
-2,Grab Bag Crisps,0,50,,
-3,Sandwiches,0,51,,
-4,Snacks,0,52,,
-5,500ml Drinks,0,53,,
-6,Fruit Bags,2,54,,
-7,Fruit boxes,3-6,54,,
-8,Grapes,0,55,,
-9,Stawberries,2-4,56,,
-10,Blueberries,0,57,,
-11,Blackcurrents,0,57,,
-12,Peaches,0,58,,
-13,Plums,0,58,,
-14,Cherries,0,58,,
-15,Kiwi Fruit,1,59,,
-16,Coconuts,1,59,,
-17,Papaya,1,59,,
-18,Pineapple,2,59,,
-19,Pomegranate,2,59,,
-20,Mango,3,59,,
-21,Melons,1-3,60,,
-22,Frozen Free From,0,61,,
-23,Chilled Free From,0,62,,
-24,Free From,0,63,,
-25,Salad Tomatoes,0,22,,
-26,Cherry Tomaotes,0,22,,
-27,Vine Tomatoes,0,23,,
-28,Apples,0,26,,
-29,Pears,0,30,,
-30,Lemons,0,31,,
-31,Limes,0,31,,
-32,Grapefruit,0,31,,
-33,Pomello,0,31,,
-34,Oranges,0,32,,
-35,Sweetclems,0,33,,
-36,Bananas,0,35,,
-37,Peppers,0,37,,
-38,Courgettes,0,40,,
-39,Leeks,0,40,,
-40,Sprouts ,0,40,,
-41,Cabbages,0,41,,
-42,Kale,0,41,,
-43,Spring Greens,0,41,,
-44,Sliced Greens,0,41,,
-45,Parsnips,0,42,,
-46,Stew Pack,0,42,,
-47,Celeriac,0,42,,
-48,Butternut Squash,0,42,,
-49,Bunched Beetroot,0,42,,
-50,Aubergine,0,42,,
-51,Brocoli,0,38,,
-52,Brocoli (Tenderstem),0,39,,
-53,Cauliflower,0,39,,
-54,Herbs,0,43,,
-55,Crushed Garlic,0,43,,
-56,Crushed Chlli,0,43,,
-57,Ginger,0,43,,
-58,Garlic,0,43,,
-59,Fresh Chillies,0,43,,
-60,Carrots,0,44,,
-61,Onions,0,45,,
-62,Shallots,0,45,,
-63,Potatoes (Baby) ,0,48,,
-64,Potatoes (Sweet),0,48,,
-65,Potatoes (Red),0,46,,
-66,Potatoes (White),0,46,,
-67,Potatoes (Baking),0,47,,
-68,Bagged Salad,0,1,,
-69,Lettuce (Iceberg),1,2,,
-70,Chinese Leaf,2,2,,
-71,Lettuce (Romaine Heart),3,2,,
-72,Lettuce (Little Gem),4,2,,
-73,Cucumber,1,3,,
-74,Salad Onions,2,3,,
-75,Fennel,4,3,,
-76,Cress,4,3,,
-77,Celery,1,4,,
-78,Beetroot,0,4,,
-79,Radish,1,4,,
-80,Mushrooms (Button),1,5,,
-81,Mushrooms (Chesnut),1,5,,
-82,Avocado,2,5,,
-83,Mushrooms (Sliced),3,5,,
-84,Mushrooms (Large),4,5,,
-85,Mushrooms (Closed Cup),0,6,,
-86,Mushrooms (Woodland),4,6,,
-87,Mushrooms (Shiitake),4,6,,
-88,Sweetcorn (On The Cob),0,8,,
-89,Green Beans,0,8,,
-90,Asparagus,3,8,,
-91,Baby Corn,3,8,,
-92,Sugar Snap Peas,3,8,,
-93,Pak Choi,4,8,,
-94,Trimmed Mangetout,4,8,,
-95,Mashed Potato,1,9,,
-96,Mashed Turnip,1,9,,
-97,Potato Wedges,2,9,,
-98,Potato Croquettes,2,9,,
-99,Potatoes (Herby Baby),2,9,,
-100,Potatoes (Peeled),2,9,,
-101,Mixed Vegetables,3,9,,
-102,Mediterranean Vegetables,3,9,,
-103,Mushrooms (Stuffed),3,9,,
-104,White onion (diced),3,9,,
-105,Beansprouts,3,9,,
-106,Sprouts (Small Bag),4,9,,
-107,Carrot Battons,4,9,,
-108,Stir Fry Noodles,4,9,,
-109,Fish (Packaged),0,10,,
-110,Fish (Fresh),0,11,,
-111,Tortellini,0,12,,
-112,Pasta Sauce ,0,12,,
-113,Pasta (Pre-Cooked),0,13,,
-114,Garlic Bread,0,14,,
-115,Pizza ,0,15,,
-116,Salad Bar,0,17,,
-117,Deli,0,18,,
-118,Beer (660ml Bottles),0,353,,
-119,Beer (Boxed),0,354,,
-120,Cocktails (Mixed Cans),0,355,,
-121,Non-Alcholic Drinks,0,356,,
-122,Beer (Cans),0,357,,
-123,Cider,0,358,,
-124,Wine (Red),0,359,,
-125,Wine (Boxed),0,360,,
-126,Wine (Rose),0,361,,
-127,Wine (White),0,362,,
-128,Prosecco,0,363,,
-129,Champagne,0,363,,
-130,Spirits,0,364,,
-131,Tonic Water,0,365,,
-132,Adult Soft Drinks,0,366,,
-133,Coca Cola (2L),0,367,,
-134,Coca Cola (Cans),0,368,,
-135,Soft Drinks (Cans),0,378,,
-136,Soft Drinks (2L),0,376,,
-137,Pepsi,0,371,,
-138,Juice (Cartons),0,379,,
-139,Fruit Shoot,0,380,,
-140,Juice (Fruit),0,383,,
-141,Lucozade ,0,384,,
-142,Energy Drinks,0,386,,
-143,IRN Bru (2L),0,390,,
-144,IRN Bru (Cans),0,388,,
-145,Juice (Diluting),0,392,,
-146,Cordial,0,394,,
-147,Flavoured Water (2L),0,395,,
-148,Flavoured Water (500ml),0,396,,
-149,Water (Sparkling),0,397,,
-150,Water (Still),0,400,,
-151,Crisps,0,408,,
-152,Nuts,0,415,,
-153,Crackers,0,425,,
-154,Breadsticks,0,426,,
-155,Healthy Snacks,0,428,,
-156,Breakfast Bars,0,429,,
-157,Biscuits (mini bags),0,431,,
-158,Chocolate Biscuits,0,432,,
-159,Tunnocks,0,433,,
-160,Shortbread,0,434,,
-161,Cookies,0,435,,
-162,Oreos,0,437,,
-163,Jaffa Cakes,0,437,,
-164,Digestives (Chocolate),0,438,,
-165,Digestives,0,439,,
-166,Biscuits,0,440,,
-167,Chocolate (Boxes),0,441,,
-168,Chocolate (Sharing Boxes),0,442,,
-169,Chocolate (Luxury),0,443,,
-170,Cadbury (Big bars),0,444,,
-171,Cadbury (Multipack),0,445,,
-172,Chocolate,0,446,,
-173,Chocolate (Multipack),0,447,,
-174,Sweets,0,453,,
-175,Chocolate Raisins,0,451,,
-176,Chewing Gum,0,450,,
-177,Chocolate (Bags),0,449,,
-178,Jelly,0,454,,
-179,Custard,0,455,,
-180,Tinned Fruit,0,456,,
-181,Cereal (Crunchy Nut),0,458,,
-182,Cereal ,0,459,,
-183,Cereal (Coco Pops),0,460,,
-184,Cereal (Rice Krispies),0,462,,
-185,Cereal (Cornflakes),0,463,,
-186,Custard Powder,0,467,,
-187,Sponge Puddings,0,468,,
-188,Meringues,0,469,,
-189,Evaportated Milk,0,470,,
-190,Ice Cream Cones,0,471,,
-191,Pop Tarts,0,472,,
-192,Porridge (Instant),0,473,,
-193,Porridge (Flavoured),0,474,,
-194,Porridge ,0,475,,
-195,Granola,0,477,,
-196,Weetabix,0,479,,
-197,Nut Milk,0,480,,
-198,Longlife Milk,0,482,,
-199,Cake Mix,0,483,,
-200,Cake Decorations,0,484,,
-201,Flour,0,485,,
-202,Syrup,0,485,,
-203,Homebaking,0,486,,
-204,Yeast,0,487,,
-205,Dried Fruit,0,488,,
-206,Fruit Winders,0,489,,
-207,Eggs (Medium),0,491,,
-208,Eggs (Large),0,492,,
-209,Tea,0,493,,
-210,Tetley,0,494,,
-211,PG Tips,0,495,,
-212,Tea (Green),0,496,,
-213,Tea (Speciality),0,497,,
-214,Coffee (Pods),0,498,,
-215,Coffee (Ground),0,499,,
-216,Coffee (Instant),0,500,,
-217,Coffee (Satchets),0,502,,
-218,Hot Chocolate,0,503,,
-219,Sugar,0,504,,
-220,Sweeteners,0,505,,
-221,Jam,0,521,,
-222,Chocolate Spread,0,519,,
-223,Peanut Butter,0,520,,
-224,Bread (Small Loaf),0,523,,
-225,Bread (Large Loaf),0,530,,
-226,Soup,0,584,,
-227,Soup (Multipack),0,586,,
-228,Soup (Cup-a-Soup),0,588,,
-229,Clearance,0,589,,
-230,Pot Noodle ,0,591,,
-231,Instant Noodles,0,592,,
-232,Instant Pasta,0,593,,
-233,Tinned Meat,0,594,,
-234,Ready Meals (Tinned),0,595,,
-235,Tinned Vegetables,0,597,,
-236,Sweetcorn (Tinned),0,598,,
-237,Tinned Beans,0,599,,
-238,Tomato Puree,0,600,,
-239,Chopped Tomatoes,0,600,,
-240,Plum Tomatoes,0,600,,
-241,Tomato Pasatta,0,601,,
-242,Tinned Tomatoes,0,602,,
-243,Baked Beans,0,603,,
-244,Heinz Beans,0,604,,
-245,Heinz Beans (Multipack),0,605,,
-246,Spaghetti Hoops,0,606,,
-247,Tinned Fish,0,608,,
-248,Packet Mixes,0,558,,
-249,Sauce Mixes,0,559,,
-250,Soy Sauce,0,560,,
-251,Seaweed,7,560,,
-252,Chinese Style Sauces,0,561,,
-253,Noodles,0,562,,
-254,Stir Fry Sauce,0,562,,
-255,Poppadoms,0,563,,
-256,Naan Bread,0,564,,
-257,Curry Paste,0,564,,
-258,Curry Sauce,0,565,,
-259,Rice,0,566,,
-260,Microwave rice,0,567,,
-261,Rice (Microwave),0,568,,
-262,Fajita Kits,0,569,,
-263,Mexican style food,0,570,,
-264,Stock Cubes,0,571,,
-265,Gravy,0,572,,
-266,Breadcrumbs,0,573,,
-267,Lentils,0,574,,
-268,Herbs,0,575,,
-269,Spices,0,576,,
-270,Salt,0,576,,
-271,Pepper,0,576,,
-272,Cooking Sauce,0,577,,
-273,Harissa Paste,0,577,,
-274,Pasta Sauce (Large Jars),0,578,,
-275,Pasta Sauce (Stir In),0,579,,
-276,Spaghetti,0,580,,
-277,Macaroni,0,581,,
-278,Gnocchi,0,582,,
-279,Penne ,0,583,,
-280,Soup (Fresh),0,673,,
-281,Quorn,0,672,,
-282,Ready Meals (Pasta),0,671,,
-283,Ready Meals,0,670,,
-284,Ready Meals (For 2),0,669,,
-285,Cauliflower Cheese,0,668,,
-286,Ready Meals (The Best),0,667,,
-287,Takeaway Bags,0,666,,
-288,Party Food,0,665,,
-289,Pakora,0,664,,
-290,Coleslaw,0,663,,
-291,Pasta Salad,0,662,,
-292,Clearance (Chilled),0,674,,
-293,Microwave Chips,0,346,,
-294,Potato Wedges (Frozen),0,346,,
-295,French Fries ,0,346,,
-296,Chips,0,346,,
-297,Frozen Potatoes,0,346,,
-298,Frozen Vegetables,0,347,,
-299,Frozen Scampi,0,352,,
-300,Fish Fingers,0,350,,
-301,Frozen Chicken,0,349,,
-302,Yorkshire Puddings,0,348,,
-303,Pizza (Frozen),0,342,,
-304,DIY,0,282,,
-305,Laundry Powder,0,287,,
-306,Fabric Conditioner ,0,293,,
-307,Washing up Liquid,0,269,,
-308,Bleach,0,271,,
-309,Wipes,0,273,,
-310,Anti-Bacterial Sprays,0,275,,
+1,Flowers,0,49
+2,Grab Bag Crisps,0,50
+3,Sandwiches,0,51
+4,Snacks,0,52
+5,500ml Drinks,0,53
+6,Fruit Bags,2,54
+7,Fruit boxes,0,54
+8,Grapes,0,55
+9,Stawberries,0,56
+10,Blueberries,0,57
+11,Blackcurrents,0,57
+12,Peaches,0,58
+13,Plums,0,58
+14,Cherries,0,58
+15,Kiwi Fruit,1,59
+16,Coconuts,1,59
+17,Papaya,1,59
+18,Pineapple,2,59
+19,Pomegranate,2,59
+20,Mango,3,59
+21,Melons,0,60
+22,Frozen Free From,0,61
+23,Chilled Free From,0,62
+24,Free From,0,63
+25,Salad Tomatoes,0,22
+26,Cherry Tomaotes,0,22
+27,Vine Tomatoes,0,23
+28,Apples,0,26
+29,Pears,0,30
+30,Lemons,0,31
+31,Limes,0,31
+32,Grapefruit,0,31
+33,Pomello,0,31
+34,Oranges,0,32
+35,Sweetclems,0,33
+36,Bananas,0,35
+37,Peppers,0,37
+38,Courgettes,0,40
+39,Leeks,0,40
+40,Sprouts ,0,40
+41,Cabbages,0,41
+42,Kale,0,41
+43,Spring Greens,0,41
+44,Sliced Greens,0,41
+45,Parsnips,0,42
+46,Stew Pack,0,42
+47,Celeriac,0,42
+48,Butternut Squash,0,42
+49,Bunched Beetroot,0,42
+50,Aubergine,0,42
+51,Brocoli,0,38
+52,Brocoli (Tenderstem),0,39
+53,Cauliflower,0,39
+54,Herbs,0,43
+55,Crushed Garlic,0,43
+56,Crushed Chlli,0,43
+57,Ginger,0,43
+58,Garlic,0,43
+59,Fresh Chillies,0,43
+60,Carrots,0,44
+61,Onions,0,45
+62,Shallots,0,45
+63,Potatoes (Baby) ,0,48
+64,Potatoes (Sweet),0,48
+65,Potatoes (Red),0,46
+66,Potatoes (White),0,46
+67,Potatoes (Baking),0,47
+68,Bagged Salad,0,1
+69,Lettuce (Iceberg),1,2
+70,Chinese Leaf,2,2
+71,Lettuce (Romaine Heart),3,2
+72,Lettuce (Little Gem),4,2
+73,Cucumber,1,3
+74,Salad Onions,2,3
+75,Fennel,4,3
+76,Cress,4,3
+77,Celery,1,4
+78,Beetroot,0,4
+79,Radish,1,4
+80,Mushrooms (Button),1,5
+81,Mushrooms (Chesnut),1,5
+82,Avocado,2,5
+83,Mushrooms (Sliced),3,5
+84,Mushrooms (Large),4,5
+85,Mushrooms (Closed Cup),0,6
+86,Mushrooms (Woodland),4,6
+87,Mushrooms (Shiitake),4,6
+88,Sweetcorn (On The Cob),0,8
+89,Green Beans,0,8
+90,Asparagus,3,8
+91,Baby Corn,3,8
+92,Sugar Snap Peas,3,8
+93,Pak Choi,4,8
+94,Trimmed Mangetout,4,8
+95,Mashed Potato,1,9
+96,Mashed Turnip,1,9
+97,Potato Wedges,2,9
+98,Potato Croquettes,2,9
+99,Potatoes (Herby Baby),2,9
+100,Potatoes (Peeled),2,9
+101,Mixed Vegetables,3,9
+102,Mediterranean Vegetables,3,9
+103,Mushrooms (Stuffed),3,9
+104,White onion (diced),3,9
+105,Beansprouts,3,9
+106,Sprouts (Small Bag),4,9
+107,Carrot Battons,4,9
+108,Stir Fry Noodles,4,9
+109,Fish (Packaged),0,10
+110,Fish (Fresh),0,11
+111,Tortellini,0,12
+112,Pasta Sauce ,0,12
+113,Pasta (Pre-Cooked),0,13
+114,Garlic Bread,0,14
+115,Pizza ,0,15
+116,Salad Bar,0,17
+117,Deli,0,18
+118,Beer (660ml Bottles),0,353
+119,Beer (Boxed),0,354
+120,Cocktails (Mixed Cans),0,355
+121,Non-Alcholic Drinks,0,356
+122,Beer (Cans),0,357
+123,Cider,0,358
+124,Wine (Red),0,359
+125,Wine (Boxed),0,360
+126,Wine (Rose),0,361
+127,Wine (White),0,362
+128,Prosecco,0,363
+129,Champagne,0,363
+130,Spirits,0,364
+131,Tonic Water,0,365
+132,Adult Soft Drinks,0,366
+133,Coca Cola (2L),0,367
+134,Coca Cola (Cans),0,368
+135,Soft Drinks (Cans),0,378
+136,Soft Drinks (2L),0,376
+137,Pepsi,0,371
+138,Juice (Cartons),0,379
+139,Fruit Shoot,0,380
+140,Juice (Fruit),0,383
+141,Lucozade ,0,384
+142,Energy Drinks,0,386
+143,IRN Bru (2L),0,390
+144,IRN Bru (Cans),0,388
+145,Juice (Diluting),0,392
+146,Cordial,0,394
+147,Flavoured Water (2L),0,395
+148,Flavoured Water (500ml),0,396
+149,Water (Sparkling),0,397
+150,Water (Still),0,400
+151,Crisps,0,408
+152,Nuts,0,415
+153,Crackers,0,425
+154,Breadsticks,0,426
+155,Healthy Snacks,0,428
+156,Breakfast Bars,0,429
+157,Biscuits (mini bags),0,431
+158,Chocolate Biscuits,0,432
+159,Tunnocks,0,433
+160,Shortbread,0,434
+161,Cookies,0,435
+162,Oreos,0,437
+163,Jaffa Cakes,0,437
+164,Digestives (Chocolate),0,438
+165,Digestives,0,439
+166,Biscuits,0,440
+167,Chocolate (Boxes),0,441
+168,Chocolate (Sharing Boxes),0,442
+169,Chocolate (Luxury),0,443
+170,Cadbury (Big bars),0,444
+171,Cadbury (Multipack),0,445
+172,Chocolate,0,446
+173,Chocolate (Multipack),0,447
+174,Sweets,0,453
+175,Chocolate Raisins,0,451
+176,Chewing Gum,0,450
+177,Chocolate (Bags),0,449
+178,Jelly,0,454
+179,Custard,0,455
+180,Tinned Fruit,0,456
+181,Cereal (Crunchy Nut),0,458
+182,Cereal ,0,459
+183,Cereal (Coco Pops),0,460
+184,Cereal (Rice Krispies),0,462
+185,Cereal (Cornflakes),0,463
+186,Custard Powder,0,467
+187,Sponge Puddings,0,468
+188,Meringues,0,469
+189,Evaportated Milk,0,470
+190,Ice Cream Cones,0,471
+191,Pop Tarts,0,472
+192,Porridge (Instant),0,473
+193,Porridge (Flavoured),0,474
+194,Porridge ,0,475
+195,Granola,0,477
+196,Weetabix,0,479
+197,Nut Milk,0,480
+198,Longlife Milk,0,482
+199,Cake Mix,0,483
+200,Cake Decorations,0,484
+201,Flour,0,485
+202,Syrup,0,485
+203,Homebaking,0,486
+204,Yeast,0,487
+205,Dried Fruit,0,488
+206,Fruit Winders,0,489
+207,Eggs (Medium),0,491
+208,Eggs (Large),0,492
+209,Tea,0,493
+210,Tetley,0,494
+211,PG Tips,0,495
+212,Tea (Green),0,496
+213,Tea (Speciality),0,497
+214,Coffee (Pods),0,498
+215,Coffee (Ground),0,499
+216,Coffee (Instant),0,500
+217,Coffee (Satchets),0,502
+218,Hot Chocolate,0,503
+219,Sugar,0,504
+220,Sweeteners,0,505
+221,Jam,0,521
+222,Chocolate Spread,0,519
+223,Peanut Butter,0,520
+224,Bread (Small Loaf),0,523
+225,Bread (Large Loaf),0,530
+226,Soup,0,584
+227,Soup (Multipack),0,586
+228,Soup (Cup-a-Soup),0,588
+229,Clearance,0,589
+230,Pot Noodle ,0,591
+231,Instant Noodles,0,592
+232,Instant Pasta,0,593
+233,Tinned Meat,0,594
+234,Ready Meals (Tinned),0,595
+235,Tinned Vegetables,0,597
+236,Sweetcorn (Tinned),0,598
+237,Tinned Beans,0,599
+238,Tomato Puree,0,600
+239,Chopped Tomatoes,0,600
+240,Plum Tomatoes,0,600
+241,Tomato Pasatta,0,601
+242,Tinned Tomatoes,0,602
+243,Baked Beans,0,603
+244,Heinz Beans,0,604
+245,Heinz Beans (Multipack),0,605
+246,Spaghetti Hoops,0,606
+247,Tinned Fish,0,608
+248,Packet Mixes,0,558
+249,Sauce Mixes,0,559
+250,Soy Sauce,0,560
+251,Seaweed,7,560
+252,Chinese Style Sauces,0,561
+253,Noodles,0,562
+254,Stir Fry Sauce,0,562
+255,Poppadoms,0,563
+256,Naan Bread,0,564
+257,Curry Paste,0,564
+258,Curry Sauce,0,565
+259,Rice,0,566
+260,Microwave rice,0,567
+261,Rice (Microwave),0,568
+262,Fajita Kits,0,569
+263,Mexican style food,0,570
+264,Stock Cubes,0,571
+265,Gravy,0,572
+266,Breadcrumbs,0,573
+267,Lentils,0,574
+268,Herbs,0,575
+269,Spices,0,576
+270,Salt,0,576
+271,Pepper,0,576
+272,Cooking Sauce,0,577
+273,Harissa Paste,0,577
+274,Pasta Sauce (Large Jars),0,578
+275,Pasta Sauce (Stir In),0,579
+276,Spaghetti,0,580
+277,Macaroni,0,581
+278,Gnocchi,0,582
+279,Penne ,0,583
+280,Soup (Fresh),0,673
+281,Quorn,0,672
+282,Ready Meals (Pasta),0,671
+283,Ready Meals,0,670
+284,Ready Meals (For 2),0,669
+285,Cauliflower Cheese,0,668
+286,Ready Meals (The Best),0,667
+287,Takeaway Bags,0,666
+288,Party Food,0,665
+289,Pakora,0,664
+290,Coleslaw,0,663
+291,Pasta Salad,0,662
+292,Clearance (Chilled),0,674
+293,Microwave Chips,0,346
+294,Potato Wedges (Frozen),0,346
+295,French Fries ,0,346
+296,Chips,0,346
+297,Frozen Potatoes,0,346
+298,Frozen Vegetables,0,347
+299,Frozen Scampi,0,352
+300,Fish Fingers,0,350
+301,Frozen Chicken,0,349
+302,Yorkshire Puddings,0,348
+303,Pizza (Frozen),0,342
+304,DIY,0,282
+305,Laundry Powder,0,287
+306,Fabric Conditioner ,0,293
+307,Washing up Liquid,0,269
+308,Bleach,0,271
+309,Wipes,0,273
+310,Anti-Bacterial Sprays,0,275

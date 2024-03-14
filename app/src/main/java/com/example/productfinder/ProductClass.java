@@ -34,7 +34,7 @@ public class ProductClass {
 
     public void setProductName(String aProductName) {productName = aProductName;}
 
-    public String getShelfRow() {return getShelfRow();}
+    public String getShelfRow() {return shelfRow;}
 
     public void setShelfRow(String aShelfRow) {shelfRow = aShelfRow;}
 
