@@ -380,10 +380,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 nextButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        currentIndex =(currentIndex + 1) % shoppingList.size();
-                        String counterText = (currentIndex+1) + "/" + shoppingList.size();
-                        shoppingListCounter.setText(counterText);
-                        shoppingListDisplayProduct();
+                        if (currentIndex == shoppingList.size()-1) {
+                            String text = "That's it! You've collected everything on your list please head to the checkouts.";
+                            productDetails.setText(text);
+                            currentIndex = currentIndex + 1;
+                            String btnText = "Close";
+                            nextButton.setText(btnText);
+                        } else if (currentIndex == shoppingList.size()) {
+                            setContentView(R.layout.shopping_list_layout);
+                            handleShowCreatedShoppingLists();
+                        } else {
+                            currentIndex = (currentIndex + 1) % shoppingList.size();
+                            String counterText = (currentIndex + 1) + "/" + shoppingList.size();
+                            shoppingListCounter.setText(counterText);
+                            shoppingListDisplayProduct();
+                            previousButton.setVisibility(View.VISIBLE);
+                            if (currentIndex == shoppingList.size() - 1) {
+                                String btnText = "Finish";
+                                nextButton.setText(btnText);
+                            }
+                        }
                     }
                 });
 
@@ -394,6 +410,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         String counterText = (currentIndex+1) + "/" + shoppingList.size();
                         shoppingListCounter.setText(counterText);
                         shoppingListDisplayProduct();
+                        if (currentIndex == 0) {
+                            previousButton.setVisibility(View.GONE);
+                        }
+                        if (currentIndex == shoppingList.size() - 1) {
+                            //Good practice to not set text literal in setText method
+                            String btnTxt = "Finish";
+                            nextButton.setText(btnTxt);
+                        }
+                        if (currentIndex < shoppingList.size() - 1) {
+                            String btnText = "Next";
+                            nextButton.setText(btnText);
+                        }
                     }
                 });
             }

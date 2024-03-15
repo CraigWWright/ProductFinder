@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="700dp"
         android:layout_marginLeft="25dp"
+        android:visibility="gone"
         android:text="Previous" />
 
     <Button
