@@ -7,6 +7,7 @@ public class ShelfClass {
     private int shelfNo;
     private int xpos;
     private int ypos;
+    private int node;
 
     public ShelfClass() {
         shelfID=0;
@@ -15,14 +16,16 @@ public class ShelfClass {
         shelfNo=0;
         xpos =0;
         ypos = 0;
+        node = 0;
     }
-    public ShelfClass(int shelfID, int aisleNo, String side, int shelfNo, int xpos, int ypos) {
+    public ShelfClass(int shelfID, int aisleNo, String side, int shelfNo, int xpos, int ypos, int node) {
         this.shelfID = shelfID;
         this.aisleNo = aisleNo;
         this.side = side;
         this.shelfNo = shelfNo;
         this.xpos = xpos;
         this.ypos = ypos;
+        this.node = node;
     }
 
     public int getShelfID() {
@@ -72,4 +75,8 @@ public class ShelfClass {
     public void setYpos(int ypos) {
         this.ypos = ypos;
     }
+
+    public int getNode() {return node;}
+
+    public void setNode(int node) { this.node = node;}
 }

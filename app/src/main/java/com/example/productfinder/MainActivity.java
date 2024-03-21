@@ -29,6 +29,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 shelfClass.setShelfNo(Integer.parseInt(tokens[3]));
                 shelfClass.setXpos(Integer.parseInt(tokens[4]));
                 shelfClass.setYpos(Integer.parseInt(tokens[5]));
+                shelfClass.setNode(Integer.parseInt(tokens[6]));
                 shelfClassList.add(shelfClass);
             }
         }
@@ -291,28 +293,297 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ShoppingListAdapter adapter = new ShoppingListAdapter(this, 0, productClassList);
             createShoppingListView.setAdapter(adapter);
 
+            EditText enteredFilename = findViewById(R.id.userFilename);
 
             submitShoppingListButton = findViewById(R.id.submitButton);
             submitShoppingListButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditText enteredFilename = findViewById(R.id.userFilename);
                     String shoppingListName = enteredFilename.getText().toString();
                     String shoppingListFile = shoppingListName + ".txt";
 
+
+
+
+                    //////////////////////////
+                    /////////////////////////
+                    // CODE FOR SORTING SHOPPING LIST
+
+
+                    InputStream is = getResources().openRawResource(R.raw.matrix_1);
+                    StringBuilder matrixString = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is2 = getResources().openRawResource(R.raw.matrix_2);
+                    StringBuilder matrixString2 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is2, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString2.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is3 = getResources().openRawResource(R.raw.matrix_3);
+                    StringBuilder matrixString3 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is3, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString3.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is4 = getResources().openRawResource(R.raw.matrix_4);
+                    StringBuilder matrixString4 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is4, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString4.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is5 = getResources().openRawResource(R.raw.matrix_5);
+                    StringBuilder matrixString5 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is5, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString5.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is6 = getResources().openRawResource(R.raw.matrix_6);
+                    StringBuilder matrixString6 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is6, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString6.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is7 = getResources().openRawResource(R.raw.matrix_7);
+                    StringBuilder matrixString7 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is7, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString7.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is8 = getResources().openRawResource(R.raw.matrix_8);
+                    StringBuilder matrixString8 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is8, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString8.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is9 = getResources().openRawResource(R.raw.matrix_9);
+                    StringBuilder matrixString9 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is9, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString9.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is10 = getResources().openRawResource(R.raw.matrix_10);
+                    StringBuilder matrixString10 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is10, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString10.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is11 = getResources().openRawResource(R.raw.matrix_11);
+                    StringBuilder matrixString11 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is11, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString11.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is12 = getResources().openRawResource(R.raw.matrix_12);
+                    StringBuilder matrixString12 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is12, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString12.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is13 = getResources().openRawResource(R.raw.matrix_13);
+                    StringBuilder matrixString13 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is13, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString13.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is14 = getResources().openRawResource(R.raw.matrix_14);
+                    StringBuilder matrixString14 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is14, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString14.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is15 = getResources().openRawResource(R.raw.matrix_15);
+                    StringBuilder matrixString15 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is15, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString15.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is16 = getResources().openRawResource(R.raw.matrix_16);
+                    StringBuilder matrixString16 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is16, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString16.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is17 = getResources().openRawResource(R.raw.matrix_17);
+                    StringBuilder matrixString17 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is17, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString17.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is18 = getResources().openRawResource(R.raw.matrix_18);
+                    StringBuilder matrixString18 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is18, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString18.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    InputStream is19 = getResources().openRawResource(R.raw.matrix_19);
+                    StringBuilder matrixString19 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is19, Charset.forName("UTF-8")));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString19.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    String test = matrixString.toString() + matrixString2.toString() + matrixString3.toString() + matrixString4.toString() + matrixString5.toString() + matrixString6.toString() + matrixString7.toString()+ matrixString8.toString()+ matrixString9.toString()+ matrixString10.toString()+ matrixString11.toString()+ matrixString12.toString()+ matrixString13.toString()+ matrixString14.toString()+ matrixString15.toString()+ matrixString16.toString()+ matrixString17.toString()+ matrixString18.toString()+ matrixString19.toString();
+
+
+                    Log.d("THis", String.valueOf(test.length()));
+
+                    int[][] graph = createGraph(test, 157, 157);
+
+
+                    ArrayList<ProductClass> unsortedShoppingList = new ArrayList<ProductClass>();
+                    for (ProductClass productClass : productClassList){
+                        if (productClass.isChecked()) {
+                            unsortedShoppingList.add(productClass);
+                        }
+                    }
+
+                    for (ProductClass productClass : unsortedShoppingList) {
+                        Log.d("Unsorted", productClass.getProductName());
+                    }
+
+                    int size = unsortedShoppingList.size();
+                    int srcShelf = 0;
+                    ArrayList<ProductClass> sortedShoppingList = new ArrayList<>();
+
+                    for (int i=0; i<size; i++) {
+                        if (!sortedShoppingList.isEmpty()) {
+                            //srcShelf = sortedShoppingList.get(i-1).getShelfNode();
+                            srcShelf = shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode();
+                        }
+                        ProductClass productClass = findShortest(graph, srcShelf, unsortedShoppingList);
+                        sortedShoppingList.add(productClass);
+                    }
+
+                    for (ProductClass productClass : sortedShoppingList) {
+                        Log.d("Message", productClass.getProductName());
+                    }
+
                     try {
                         FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
-                        for (ProductClass product : productClassList) {
-                            if (product.isChecked()) {
+                        for (ProductClass product : sortedShoppingList) {
                                 fileOutputStream.write((product.getProductID() + "," + product.getProductName() + "," + product.getShelfRow() + "," + product.getShelfID() + "," +"\n").getBytes());
                                 product.setChecked(false);
-                            }
                         }
                         fileOutputStream.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    
 
                     shoppingListName = shoppingListName + ",";
 
@@ -332,6 +603,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             initSearchWidgetsForShoppingList();
 
         }
+    }
+
+    public static ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
+        int min  = 100;
+        int counter = 0;
+        for (int i = 0; i<list.size(); i++) {
+            int distance = dijkstra(graph, srcShelf, shelfClassList.get(i).getNode());
+            if (distance < min) {
+                min = distance;
+                counter = i;
+            }
+        }
+        ProductClass node = list.get(counter);
+        list.remove(counter);
+        return node;
     }
 
     public void handleShowCreatedShoppingLists() {
@@ -462,7 +748,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ;
 
         productDetails.setText(location);
+    }
 
+    public static int[][] createGraph(String matrixString, int rows, int cols) {
+        int[][] graph = new int[rows][cols];
+        String[] values = matrixString.split(",");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                graph[i][j] = Integer.parseInt(values[i * cols + j].trim());
+            }
+        }
+        return graph;
+    }
 
+    public static int dijkstra(int[][] graph, int src, int dest) {
+        int n = graph.length;
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[src] = 0;
+        boolean[] visited = new boolean[n];
+
+        for (int count = 0; count < n - 1; count++) {
+            int u = minDistance(dist, visited);
+            visited[u] = true;
+
+            for (int v = 0; v < n; v++) {
+                if (!visited[v] && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE &&
+                        dist[u] + graph[u][v] < dist[v]) {
+                    dist[v] = dist[u] + graph[u][v];
+                }
+            }
+        }
+
+        return dist[dest];
+    }
+
+    public static int minDistance(int[] dist, boolean[] visited) {
+        int min = Integer.MAX_VALUE;
+        int minIndex = -1;
+        for (int i = 0; i < dist.length; i++) {
+            if (!visited[i] && dist[i] <= min) {
+                min = dist[i];
+                minIndex = i;
+            }
+        }
+        return minIndex;
+    }
+
+    private String cleanString(String input) {
+        // Define a regular expression pattern to match invisible characters
+        Pattern pattern = Pattern.compile("\\s+");
+        // Replace any invisible characters with an empty string
+        return pattern.matcher(input).replaceAll("");
     }
 }
