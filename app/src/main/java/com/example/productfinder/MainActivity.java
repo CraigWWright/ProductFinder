@@ -540,13 +540,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     String test = matrixString.toString() + matrixString2.toString() + matrixString3.toString() + matrixString4.toString() + matrixString5.toString() + matrixString6.toString() + matrixString7.toString()+ matrixString8.toString()+ matrixString9.toString()+ matrixString10.toString()+ matrixString11.toString()+ matrixString12.toString()+ matrixString13.toString()+ matrixString14.toString()+ matrixString15.toString()+ matrixString16.toString()+ matrixString17.toString()+ matrixString18.toString()+ matrixString19.toString();
 
-
-                    Log.d("THis", String.valueOf(test.length()));
-
                     int[][] graph = createGraph(test, 157, 157);
 
 
                     ArrayList<ProductClass> unsortedShoppingList = new ArrayList<ProductClass>();
+                    unsortedShoppingList.clear();
                     for (ProductClass productClass : productClassList){
                         if (productClass.isChecked()) {
                             unsortedShoppingList.add(productClass);
@@ -560,6 +558,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     int size = unsortedShoppingList.size();
                     int srcShelf = 0;
                     ArrayList<ProductClass> sortedShoppingList = new ArrayList<>();
+                    sortedShoppingList.clear();
 
                     for (int i=0; i<size; i++) {
                         if (!sortedShoppingList.isEmpty()) {
@@ -717,6 +716,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void loadShoppingList(int position) {
         String filename =  (String) shoppingListFileView.getItemAtPosition(position);
         filename = filename + ".txt";
+        shoppingList.clear();
 
         File file = getApplicationContext().getFileStreamPath(filename);
 
@@ -731,6 +731,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 productClass.setProductName(tokens[1]);
                 productClass.setShelfRow(tokens[2]);
                 productClass.setShelfID(Integer.parseInt(tokens[3]));
+                Log.d("Loading", productClass.getProductName());
                 shoppingList.add(productClass);
             }
             bufferedReader.close();
