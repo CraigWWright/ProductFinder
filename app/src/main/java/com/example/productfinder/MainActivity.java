@@ -25,12 +25,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button previousButton;
     private TextView shoppingListCounter;
     private static final String shoppingListFileNames = "shoppingListFileNames.txt";
+
+    static int otherTotal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -563,11 +562,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         e.printStackTrace();
                     }
 
+                    InputStream is20 = getResources().openRawResource(R.raw.matrix_20);
+                    StringBuilder matrixString20 = new StringBuilder();
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(is20, StandardCharsets.UTF_8));
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            matrixString20.append(line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     // combines all the matrix strings into one string
-                    String test = matrixString.toString() + matrixString2.toString() + matrixString3.toString() + matrixString4.toString() + matrixString5.toString() + matrixString6.toString() + matrixString7.toString()+ matrixString8.toString()+ matrixString9.toString()+ matrixString10.toString()+ matrixString11.toString()+ matrixString12.toString()+ matrixString13.toString()+ matrixString14.toString()+ matrixString15.toString()+ matrixString16.toString()+ matrixString17.toString()+ matrixString18.toString()+ matrixString19.toString();
+                    String test = matrixString.toString() +  "\n" + matrixString2.toString() + "\n" + matrixString3.toString() + "\n" + matrixString4.toString() + "\n" + matrixString5.toString() + "\n" + matrixString6.toString() + "\n" + matrixString7.toString()+ "\n" + matrixString8.toString()+ "\n" + matrixString9.toString()+ "\n" + matrixString10.toString()+ "\n" + matrixString11.toString()+ "\n" + matrixString12.toString()+ "\n" + matrixString13.toString()+  "\n" +matrixString14.toString()+ "\n" + matrixString15.toString()+ "\n" + matrixString16.toString()+  "\n" +matrixString17.toString()+ "\n" + matrixString18.toString()+ "\n" + matrixString19.toString() + "\n" + matrixString20.toString();
+
+                    Log.d("Test", test);
 
                     // creates the distance matrix
-                    int[][] graph = createGraph(test, 157, 157);
+                    int[][] graph = createGraph(test, 158, 158);
 
                     // adding selected products to a list
                     // creates both the unsorted and sorted shopping lists
@@ -584,20 +597,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
 
-                    /*
-                    for (ProductClass productClass : unsortedShoppingList) {
-                        Log.d("Unsorted", productClass.getProductName());
-                    }
-                     */
-                    int size = unsortedShoppingList.size();
+
                     // the first srcShelf is always at the entrance of the shop
                     int srcShelf = 0;
+                    int size = unsortedShoppingList.size();
 
                     // loops through all the products in the unsorted list
                     for (int i=0; i<size; i++) {
                         if (!sortedShoppingList.isEmpty()) {
                             // sets the srcShelf to whatever product was most recently added to the sorted list
                             // i.e. find the product closest to the product last visited
+                            Log.d("Line 642", "Setting the shelf for:" + sortedShoppingList.get(i-1).getProductName() + " at node: " + shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode());
                             srcShelf = shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode();
                         }
                         // finds the closest product to the srcShelf
@@ -606,11 +616,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         sortedShoppingList.add(productClass);
                     }
 
-                    /*
-                    for (ProductClass productClass : sortedShoppingList) {
-                        Log.d("Message", productClass.getProductName());
-                    } */
+                    Log.d("Total for min:", String.valueOf(otherTotal));
 
+                    for (ProductClass productClass : sortedShoppingList) {
+                        Log.d("Min order:", productClass.getProductName())    ;
+                    }
+
+
+/*
                     // saves the sorted shopping list to a file for the user to access later
                     try {
                         FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
@@ -639,6 +652,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setContentView(R.layout.shopping_list_layout);
                     // updates the list view containing the shopping lists
                     handleShowCreatedShoppingLists();
+
+
+ */
+
+
+
                 }
             });
             // allows for searching for products when creating the shopping list
@@ -647,22 +666,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public static ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
+    /*public static ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
         int min  = Integer.MAX_VALUE;
         int counter = 0;
         // loops through all the remaining products in the unsorted list
         // finds the closest product to the srcShelf and returns it
         for (int i = 0; i<list.size(); i++) {
-            int distance = dijkstra(graph, srcShelf, shelfClassList.get(i).getNode());
+            int dstnShelf = shelfClassList.get(list.get(i).getShelfID()).getNode();
+            Log.d("Line 704", "Finding the distance between:" + srcShelf + " and " + dstnShelf + "for product: " + list.get(i).getProductName());
+            int distance;
+            distance = dijkstra(graph, srcShelf, dstnShelf);
+            if (distance < min) {
+                min = distance;
+                Log.d("Line 708", "The distance between " + srcShelf + " and " + list.get(i).getProductName() + " is " + distance );
+                counter = i;
+            }
+        }
+        ProductClass node = list.get(counter);
+        Log.d("Line 712", "The product being added to the list is:" + node.getProductName());
+        // removes the product that has just been found to be the closest from the unsorted list
+        list.remove(counter);
+        return node;
+    }
+     */
+
+    public ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
+        int min = Integer.MAX_VALUE;
+        int counter = 0;
+        for (int i=0; i<list.size(); i++) {
+            Log.d("Line 704", "Finding the distance between:" + srcShelf + " and " + shelfClassList.get(list.get(i).getShelfID()).getNode() + "for product: " + list.get(i).getProductName());
+            int distance = findDistance(graph, srcShelf, shelfClassList.get(list.get(i).getShelfID()).getNode());
+            Log.d("Line 708", "The distance between " + srcShelf + " and " + list.get(i).getProductName() + " is " + distance );
             if (distance < min) {
                 min = distance;
                 counter = i;
             }
         }
         ProductClass node = list.get(counter);
-        // removes the product that has just been found to be the closest from the unsorted list
         list.remove(counter);
         return node;
+    }
+
+    public int findDistance(int[][] graph, int srcShelf, int dest) {
+        return graph[srcShelf][dest];
+        //int distance = graph[srcShelf][dest];
+        //return distance;
     }
 
     public void handleShowCreatedShoppingLists() {
