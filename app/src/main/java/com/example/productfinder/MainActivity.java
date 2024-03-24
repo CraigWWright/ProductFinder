@@ -623,7 +623,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
 
-/*
                     // saves the sorted shopping list to a file for the user to access later
                     try {
                         FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
@@ -652,12 +651,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     setContentView(R.layout.shopping_list_layout);
                     // updates the list view containing the shopping lists
                     handleShowCreatedShoppingLists();
-
-
- */
-
-
-
                 }
             });
             // allows for searching for products when creating the shopping list
