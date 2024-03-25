@@ -10,12 +10,14 @@ import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jsibbold.zoomage.ZoomageView;
 
@@ -33,8 +35,6 @@ public class DetailActivity extends AppCompatActivity {
 
         getSelectedProduct();
         setValues();
-        highlightShelf();
-
     }
 
     private void getSelectedProduct() {
@@ -57,11 +57,6 @@ public class DetailActivity extends AppCompatActivity {
                 ;
 
         return location;
-    }
-
-    private void highlightShelf() {
-        int xPos = MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getXpos();
-        int yPos = MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getYpos();
     }
 
 }
