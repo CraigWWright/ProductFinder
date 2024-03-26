@@ -234,6 +234,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //shows the DetailActivity.java which shows the products location and shop image.
                 showDetail.putExtra("id",selectProduct.getProductID());
                 startActivity(showDetail);
+
+                /*
+                ProductClass selectedProduct = (ProductClass) (productListView.getItemAtPosition(position));
+                setContentView(R.layout.activity_detail);
+
+                String location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getAisleNo()
+                        + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getShelfNo()
+                        ;
+
+                TextView tv = (TextView) findViewById(R.id.productName);
+                tv.setText(location);
+
+                 */
+
             }
         });
 
@@ -576,8 +590,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     // combines all the matrix strings into one string
                     String test = matrixString.toString() +  "\n" + matrixString2.toString() + "\n" + matrixString3.toString() + "\n" + matrixString4.toString() + "\n" + matrixString5.toString() + "\n" + matrixString6.toString() + "\n" + matrixString7.toString()+ "\n" + matrixString8.toString()+ "\n" + matrixString9.toString()+ "\n" + matrixString10.toString()+ "\n" + matrixString11.toString()+ "\n" + matrixString12.toString()+ "\n" + matrixString13.toString()+  "\n" +matrixString14.toString()+ "\n" + matrixString15.toString()+ "\n" + matrixString16.toString()+  "\n" +matrixString17.toString()+ "\n" + matrixString18.toString()+ "\n" + matrixString19.toString() + "\n" + matrixString20.toString();
-
-                    Log.d("Test", test);
+                    
 
                     // creates the distance matrix
                     int[][] graph = createGraph(test, 158, 158);
