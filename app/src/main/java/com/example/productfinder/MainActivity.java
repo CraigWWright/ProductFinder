@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 ShelfClass shelfClass = new ShelfClass();
                 shelfClass.setShelfID(Integer.parseInt(tokens[0]));
-                shelfClass.setAisleNo(Integer.parseInt(tokens[1]));
+                shelfClass.setAisleNo(tokens[1]);
                 shelfClass.setSide(tokens[2]);
                 shelfClass.setShelfNo(Integer.parseInt(tokens[3]));
                 shelfClass.setXpos(Integer.parseInt(tokens[4]));
@@ -703,6 +703,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("Line 704", "Finding the distance between:" + srcShelf + " and " + shelfClassList.get(list.get(i).getShelfID()).getNode() + "for product: " + list.get(i).getProductName());
             int distance = findDistance(graph, srcShelf, shelfClassList.get(list.get(i).getShelfID()).getNode());
             Log.d("Line 708", "The distance between " + srcShelf + " and " + list.get(i).getProductName() + " is " + distance );
+            Log.d("Product INFO", list.get(i).getProductName() + " Aisle: " + shelfClassList.get(list.get(i).getShelfID()).getAisleNo() + " Shelf No: " + shelfClassList.get(list.get(i).getShelfID()).getShelfNo() + " Node: " + shelfClassList.get(list.get(i).getShelfID()).getNode() );
             if (distance < min) {
                 min = distance;
                 counter = i;

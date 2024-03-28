@@ -2,7 +2,7 @@ package com.example.productfinder;
 
 public class ShelfClass {
     private int shelfID;
-    private int aisleNo;
+    private String aisleNo;
     private String side;
     private int shelfNo;
     private int xpos;
@@ -11,14 +11,14 @@ public class ShelfClass {
 
     public ShelfClass() {
         shelfID=0;
-        aisleNo=0;
+        aisleNo="";
         side="";
         shelfNo=0;
         xpos =0;
         ypos = 0;
         node = 0;
     }
-    public ShelfClass(int shelfID, int aisleNo, String side, int shelfNo, int xpos, int ypos, int node) {
+    public ShelfClass(int shelfID, String aisleNo, String side, int shelfNo, int xpos, int ypos, int node) {
         this.shelfID = shelfID;
         this.aisleNo = aisleNo;
         this.side = side;
@@ -36,11 +36,11 @@ public class ShelfClass {
         this.shelfID = shelfID;
     }
 
-    public int getAisleNo() {
+    public String getAisleNo() {
         return aisleNo;
     }
 
-    public void setAisleNo(int aisleNo) {
+    public void setAisleNo(String aisleNo) {
         this.aisleNo = aisleNo;
     }
 

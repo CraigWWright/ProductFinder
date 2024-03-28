@@ -12,7 +12,7 @@
         <ListView
             android:id="@+id/shoppingListFileView"
             android:layout_width="match_parent"
-            android:layout_height="204dp" />
+            android:layout_height="434dp" />
 
 </LinearLayout>
 </ScrollView>

@@ -33,10 +33,12 @@ public class ShoppingListAdapter extends ArrayAdapter<ProductClass> {
         CheckBox checkBox = convertView.findViewById(R.id.checkbox);
         checkBox.setChecked(productClass.isChecked());
 
+
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     productClass.setChecked(isChecked);
+                    Log.d("Checked", String.valueOf(productClass.isChecked()));
                 }
             });
 

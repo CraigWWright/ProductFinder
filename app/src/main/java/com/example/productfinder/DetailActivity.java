@@ -51,10 +51,17 @@ public class DetailActivity extends AppCompatActivity {
 
     private String displayLocation(ProductClass selectedProduct) {
         //String location = String.valueOf(MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getShelfNo());
+        String location = "DEFAULT MESSAGE";
 
-        String location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getAisleNo()
-                + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getShelfNo()
-                ;
+        if (selectedProduct.getShelfRow().equals("0")) {
+            location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getAisleNo()
+                    + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getShelfNo();
+        } else {
+            location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getAisleNo()
+                    + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getShelfNo() + "\nShelf Row: " + selectedProduct.getShelfRow();
+        }
+
+        Log.d("MEssage", String.valueOf(MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getNode()));
 
         return location;
     }
