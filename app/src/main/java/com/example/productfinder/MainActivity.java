@@ -62,6 +62,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         readShelfData();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //creates the menu which allows for navigation
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //handles menu clicks
+        int itemId = item.getItemId();
+        if (itemId == R.id.home) {
+            //sets view to home page
+            setContentView(R.layout.activity_main);
+            return true;
+        } else if (itemId == R.id.ProductSearch) {
+            //sets view to product search page
+            setContentView(R.layout.productsearchlayout);
+            ///runs methods required for product search page
+            setUpList();
+            setUpOnclickListener();
+            initSearchWidgets();
+            return true;
+        } else if (itemId == R.id.ShoppingList) {
+            // sets view to shopping list page
+            setContentView(R.layout.shopping_list_layout);
+            // runs methods required for shopping list page
+            createShoppingListButton = (Button)findViewById(R.id.createShoppingListButton);
+            createShoppingListButton.setOnClickListener(this);
+            handleShowCreatedShoppingLists();
+            handleShoppingListViewClick();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     private void readProductData() {
 
         InputStream is = getResources().openRawResource(R.raw.product_database);
@@ -186,41 +223,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         productListView.setAdapter(adapter);
     }
 
-    /*
-    private void setUpFileList() {
-        //don't believe this method gets used - check for safe to delete
-        ListView shoppingListFileView = findViewById(R.id.shoppingListFileView);
-
-        List<String> fileList = getFileList();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileList);
-        shoppingListFileView.setAdapter(adapter);
-
-    }
-
-
-
-    private List<String> getFileList() {
-        List<String> fileList = new ArrayList<>();
-        File directory = new File(getFilesDir(), "Documents");
-        if (directory.exists()) {
-            File[] files = directory.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    fileList.add(file.getName());
-                }
-            } else {
-                Log.e("FileListActivity", "No files found in the directory.");
-            }
-        } else {
-            Log.e("FileListActivity", "Directory does not exist.");
-        }
-        return fileList;
-    }
-
-
-     */
-
     private void setUpOnclickListener()
     {
         //Handles clicking on a product in the product search layout
@@ -235,93 +237,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showDetail.putExtra("id",selectProduct.getProductID());
                 startActivity(showDetail);
 
-                /*
-                ProductClass selectedProduct = (ProductClass) (productListView.getItemAtPosition(position));
-                setContentView(R.layout.activity_detail);
-
-                String location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getAisleNo()
-                        + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID()-1).getShelfNo()
-                        ;
-
-                TextView tv = (TextView) findViewById(R.id.productName);
-                tv.setText(location);
-
-                 */
-
             }
         });
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //creates the menu which allows for navigation
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //handles menu clicks
-        int itemId = item.getItemId();
-        if (itemId == R.id.home) {
-            //sets view to home page
-            setContentView(R.layout.activity_main);
-            return true;
-        } else if (itemId == R.id.ProductSearch) {
-            //sets view to product search page
-            setContentView(R.layout.productsearchlayout);
-            ///runs methods required for product search page
-            setUpList();
-            setUpOnclickListener();
-            initSearchWidgets();
-            return true;
-        } else if (itemId == R.id.ShoppingList) {
-            // sets view to shopping list page
-            setContentView(R.layout.shopping_list_layout);
-            // runs methods required for shopping list page
-            createShoppingListButton = (Button)findViewById(R.id.createShoppingListButton);
-            createShoppingListButton.setOnClickListener(this);
-            handleShowCreatedShoppingLists();
-            handleShoppingListViewClick();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    /*
-    private void handleFileNameClick() {
-        // This code doesn't get used
-        shoppingListFileView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String filename = (String) shoppingListFileView.getItemAtPosition(position);
-                File file = getApplicationContext().getFileStreamPath(filename);
-                String lineFromFile;
-
-                try {
-                    BufferedReader reader = new BufferedReader(new FileReader(filename));
-                    String line="";
-                    while ((line = reader.readLine()) != null) {
-                        String[] tokens = line.split(",");
-
-                        ProductClass productClass = new ProductClass();
-                        productClass.setProductID(tokens[0]);
-                        shoppingList.add(productClass);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                for (ProductClass productClass : shoppingList) {
-                    Log.d("Message", productClass.getProductName());
-                }
-            }
-        });
-    }
-
-
-     */
     public void onClick(View aview) {
         //handles shopping list creation
         if (aview == createShoppingListButton) {
@@ -620,7 +541,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (!sortedShoppingList.isEmpty()) {
                             // sets the srcShelf to whatever product was most recently added to the sorted list
                             // i.e. find the product closest to the product last visited
-                            Log.d("Line 642", "Setting the shelf for:" + sortedShoppingList.get(i-1).getProductName() + " at node: " + shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode());
                             srcShelf = shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode();
                         }
                         // finds the closest product to the srcShelf
@@ -629,11 +549,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         sortedShoppingList.add(productClass);
                     }
 
-                    Log.d("Total for min:", String.valueOf(otherTotal));
-
-                    for (ProductClass productClass : sortedShoppingList) {
-                        Log.d("Min order:", productClass.getProductName())    ;
-                    }
 
 
                     // saves the sorted shopping list to a file for the user to access later
@@ -672,38 +587,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*public static ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
-        int min  = Integer.MAX_VALUE;
-        int counter = 0;
-        // loops through all the remaining products in the unsorted list
-        // finds the closest product to the srcShelf and returns it
-        for (int i = 0; i<list.size(); i++) {
-            int dstnShelf = shelfClassList.get(list.get(i).getShelfID()).getNode();
-            Log.d("Line 704", "Finding the distance between:" + srcShelf + " and " + dstnShelf + "for product: " + list.get(i).getProductName());
-            int distance;
-            distance = dijkstra(graph, srcShelf, dstnShelf);
-            if (distance < min) {
-                min = distance;
-                Log.d("Line 708", "The distance between " + srcShelf + " and " + list.get(i).getProductName() + " is " + distance );
-                counter = i;
-            }
-        }
-        ProductClass node = list.get(counter);
-        Log.d("Line 712", "The product being added to the list is:" + node.getProductName());
-        // removes the product that has just been found to be the closest from the unsorted list
-        list.remove(counter);
-        return node;
-    }
-     */
-
     public ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
         int min = Integer.MAX_VALUE;
         int counter = 0;
         for (int i=0; i<list.size(); i++) {
-            Log.d("Line 704", "Finding the distance between:" + srcShelf + " and " + shelfClassList.get(list.get(i).getShelfID()).getNode() + "for product: " + list.get(i).getProductName());
             int distance = findDistance(graph, srcShelf, shelfClassList.get(list.get(i).getShelfID()).getNode());
-            Log.d("Line 708", "The distance between " + srcShelf + " and " + list.get(i).getProductName() + " is " + distance );
-            Log.d("Product INFO", list.get(i).getProductName() + " Aisle: " + shelfClassList.get(list.get(i).getShelfID()).getAisleNo() + " Shelf No: " + shelfClassList.get(list.get(i).getShelfID()).getShelfNo() + " Node: " + shelfClassList.get(list.get(i).getShelfID()).getNode() );
             if (distance < min) {
                 min = distance;
                 counter = i;
@@ -716,8 +604,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public int findDistance(int[][] graph, int srcShelf, int dest) {
         return graph[srcShelf][dest];
-        //int distance = graph[srcShelf][dest];
-        //return distance;
     }
 
     public void handleShowCreatedShoppingLists() {
