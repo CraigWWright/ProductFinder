@@ -34,19 +34,6 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<ProductClass> productClassList = new ArrayList<ProductClass>();
     public static ArrayList<ShelfClass> shelfClassList = new ArrayList<ShelfClass>();
     public static ArrayList<ProductClass> shoppingList = new ArrayList<ProductClass>();
-
-    private ListView productListView;
-
-    private ListView createShoppingListView;
-    private ListView shoppingListFileView;
-    private Button createShoppingListButton;
-    private Button submitShoppingListButton;
-    private int currentIndex = 0;
-
-    private TextView productDetails;
-    private Button nextButton;
-    private Button previousButton;
-    private TextView shoppingListCounter;
     public static final String shoppingListFileNames = "shoppingListFileNames.txt";
 
     static int otherTotal = 0;
