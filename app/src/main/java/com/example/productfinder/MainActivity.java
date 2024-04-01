@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button nextButton;
     private Button previousButton;
     private TextView shoppingListCounter;
-    private static final String shoppingListFileNames = "shoppingListFileNames.txt";
+    public static final String shoppingListFileNames = "shoppingListFileNames.txt";
 
     static int otherTotal = 0;
 
@@ -74,18 +74,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //handles menu clicks
         int itemId = item.getItemId();
         if (itemId == R.id.home) {
+            Intent homePage = new Intent(getApplicationContext(), HomePage.class);
+            startActivity(homePage);
+            /*
             //sets view to home page
             setContentView(R.layout.activity_main);
+
+             */
             return true;
         } else if (itemId == R.id.ProductSearch) {
+            Intent productSearch = new Intent(getApplicationContext(), ProductSearch.class);
+            startActivity(productSearch);
+
+            /*
             //sets view to product search page
             setContentView(R.layout.productsearchlayout);
             ///runs methods required for product search page
             setUpList();
             setUpOnclickListener();
             initSearchWidgets();
+
+             */
             return true;
         } else if (itemId == R.id.ShoppingList) {
+            Intent shoppingList = new Intent(getApplicationContext(), shoppingList.class);
+            startActivity(shoppingList);
+            /*
             // sets view to shopping list page
             setContentView(R.layout.shopping_list_layout);
             // runs methods required for shopping list page
@@ -93,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             createShoppingListButton.setOnClickListener(this);
             handleShowCreatedShoppingLists();
             handleShoppingListViewClick();
+
+             */
             return true;
         }
         return super.onOptionsItemSelected(item);

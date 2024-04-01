@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.jsibbold.zoomage.ZoomageView;
@@ -52,6 +54,32 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         return location;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //creates the menu which allows for navigation
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //handles menu clicks
+        int itemId = item.getItemId();
+        if (itemId == R.id.home) {
+            Intent homePage = new Intent(getApplicationContext(), HomePage.class);
+            startActivity(homePage);
+            return true;
+        } else if (itemId == R.id.ProductSearch) {
+            Intent productSearch = new Intent(getApplicationContext(), ProductSearch.class);
+            startActivity(productSearch);
+            return true;
+        } else if (itemId == R.id.ShoppingList) {
+            Intent shoppingList = new Intent(getApplicationContext(), shoppingList.class);
+            startActivity(shoppingList);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
