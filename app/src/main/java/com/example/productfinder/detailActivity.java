@@ -19,7 +19,7 @@ public class detailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // sets view
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.product_search_detail);
 
         simpleImageView = findViewById(R.id.simpleImageView);
 

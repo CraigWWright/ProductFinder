@@ -13,7 +13,7 @@ public class homePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // sets view
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.home_page);
     }
 
     // add the options menu to the current page

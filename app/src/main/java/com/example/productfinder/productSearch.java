@@ -21,7 +21,7 @@ public class productSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // sets view
-        setContentView(R.layout.productsearchlayout);
+        setContentView(R.layout.product_search_layout);
 
         setUpList();
         setUpOnclickListener();

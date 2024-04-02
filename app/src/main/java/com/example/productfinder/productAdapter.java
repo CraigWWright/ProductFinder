@@ -22,7 +22,7 @@ public class productAdapter extends ArrayAdapter<productClass> {
         productClass productClass = getItem(position);
 
         if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.product_cell, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.product_search_cell, parent, false);
         }
         TextView tv = (TextView) convertView.findViewById(R.id.productName);
 
