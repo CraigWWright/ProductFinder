@@ -4,21 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.jsibbold.zoomage.ZoomageView;
 
-public class DetailActivity extends AppCompatActivity {
+public class detailActivity extends AppCompatActivity {
 
     ZoomageView simpleImageView;
-    ProductClass selectedProduct;
+    productClass selectedProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // sets view
         setContentView(R.layout.activity_detail);
 
         simpleImageView = findViewById(R.id.simpleImageView);
@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         // receives product from main activity
         Intent previousIntent = getIntent();
         String parsedStringID = previousIntent.getStringExtra("id");
-        selectedProduct = MainActivity.productClassList.get(Integer.parseInt(parsedStringID)-1);
+        selectedProduct = mainActivity.productClassList.get(Integer.parseInt(parsedStringID)-1);
     }
 
     private void displayLocation() {
@@ -41,21 +41,22 @@ public class DetailActivity extends AppCompatActivity {
         tv.setText(setValues(selectedProduct));
     }
 
-    private String setValues(ProductClass selectedProduct) {
+    private String setValues(productClass selectedProduct) {
         String location;
 
         // if statement adds shelf row if it is relevant
         if (selectedProduct.getShelfRow().equals("0")) {
-            location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getAisleNo()
-                    + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getShelfNo();
+            location = selectedProduct.getProductName() + " can be found in: \nAisle: " + mainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getAisleNo()
+                    + "\nSide: " + mainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getSide() + "\nShelf: " + mainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getShelfNo();
         } else {
-            location = selectedProduct.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getAisleNo()
-                    + "\nSide: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getShelfNo() + "\nShelf Row: " + selectedProduct.getShelfRow();
+            location = selectedProduct.getProductName() + " can be found in: \nAisle: " + mainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getAisleNo()
+                    + "\nSide: " + mainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getSide() + "\nShelf: " + mainActivity.shelfClassList.get(selectedProduct.getShelfID() - 1).getShelfNo() + "\nShelf Row: " + selectedProduct.getShelfRow();
         }
 
         return location;
     }
 
+    // add the options menu to the current page
     public boolean onCreateOptionsMenu(Menu menu) {
         //creates the menu which allows for navigation
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -67,11 +68,11 @@ public class DetailActivity extends AppCompatActivity {
         //handles menu clicks
         int itemId = item.getItemId();
         if (itemId == R.id.home) {
-            Intent homePage = new Intent(getApplicationContext(), HomePage.class);
+            Intent homePage = new Intent(getApplicationContext(), com.example.productfinder.homePage.class);
             startActivity(homePage);
             return true;
         } else if (itemId == R.id.ProductSearch) {
-            Intent productSearch = new Intent(getApplicationContext(), ProductSearch.class);
+            Intent productSearch = new Intent(getApplicationContext(), com.example.productfinder.productSearch.class);
             startActivity(productSearch);
             return true;
         } else if (itemId == R.id.ShoppingList) {

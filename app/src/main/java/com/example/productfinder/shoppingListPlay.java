@@ -2,7 +2,6 @@ package com.example.productfinder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,15 +28,18 @@ public class shoppingListPlay extends AppCompatActivity {
 
     private int currentIndex = 0;
 
-    ArrayList<ProductClass> sortedShoppingList = new ArrayList<ProductClass>();
+    ArrayList<productClass> sortedShoppingList = new ArrayList<productClass>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // sets view
         setContentView(R.layout.shopping_list_play_layout);
 
+        // receives name of shopping list to be opened from previous activity
         Intent previousIntent = getIntent();
         String filename = previousIntent.getStringExtra("filename");
 
+        // loads the selected shopping list and sorts it
         loadShoppingList(filename);
 
         currentIndex = 0;
@@ -118,10 +120,10 @@ public class shoppingListPlay extends AppCompatActivity {
 
     public void shoppingListDisplayProduct() {
         // displays the current product in the shopping list
-        ProductClass productClass = sortedShoppingList.get(currentIndex);
+        productClass productClass = sortedShoppingList.get(currentIndex);
 
-        String location = productClass.getProductName() + " can be found in: \nAisle: " + MainActivity.shelfClassList.get(productClass.getShelfID()-1).getAisleNo()
-                + "\nSide: " + MainActivity.shelfClassList.get(productClass.getShelfID()-1).getSide() + "\nShelf: " + MainActivity.shelfClassList.get(productClass.getShelfID()-1).getShelfNo()
+        String location = productClass.getProductName() + " can be found in: \nAisle: " + mainActivity.shelfClassList.get(productClass.getShelfID()-1).getAisleNo()
+                + "\nSide: " + mainActivity.shelfClassList.get(productClass.getShelfID()-1).getSide() + "\nShelf: " + mainActivity.shelfClassList.get(productClass.getShelfID()-1).getShelfNo()
                 ;
 
         productDetails.setText(location);
@@ -129,19 +131,19 @@ public class shoppingListPlay extends AppCompatActivity {
 
 
     public void loadShoppingList(String filename) {
-        ArrayList<ProductClass> unsortedShoppingList = new ArrayList<ProductClass>();
-        unsortedShoppingList.clear();
+        ArrayList<productClass> unsortedShoppingList = new ArrayList<productClass>();
         sortedShoppingList.clear();
 
-        File file = getApplicationContext().getFileStreamPath(filename);
 
+        // reads in products from shopping list into the unsorted list
+        File file = getApplicationContext().getFileStreamPath(filename);
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             String line ="";
             while ((line = bufferedReader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                ProductClass productClass = new ProductClass();
+                productClass productClass = new productClass();
                 productClass.setProductID(tokens[0]);
                 productClass.setProductName(tokens[1]);
                 productClass.setShelfRow(tokens[2]);
@@ -415,12 +417,13 @@ public class shoppingListPlay extends AppCompatActivity {
             if (!sortedShoppingList.isEmpty()) {
                 // sets the srcShelf to whatever product was most recently added to the sorted list
                 // i.e. find the product closest to the product last visited
-                srcShelf = MainActivity.shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode();
+                srcShelf = mainActivity.shelfClassList.get(sortedShoppingList.get(i-1).getShelfID()).getNode();
             }
             // finds the closest product to the srcShelf
-            ProductClass productClass = findShortest(graph, srcShelf, unsortedShoppingList);
+            productClass productClass = findShortest(graph, srcShelf, unsortedShoppingList);
             // adds this product to the sorted list
             sortedShoppingList.add(productClass);
+            unsortedShoppingList.clear();
         }
     }
 
@@ -436,17 +439,20 @@ public class shoppingListPlay extends AppCompatActivity {
         return graph;
     }
 
-    public ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
+    public productClass findShortest(int[][] graph, int srcShelf, ArrayList<productClass> list) {
+        // finds product closest to srcShelf
         int min = Integer.MAX_VALUE;
         int counter = 0;
+        // loops through all products in unsorted list and finds minimum distance
         for (int i=0; i<list.size(); i++) {
-            int distance = findDistance(graph, srcShelf, MainActivity.shelfClassList.get(list.get(i).getShelfID()).getNode());
+            int distance = findDistance(graph, srcShelf, mainActivity.shelfClassList.get(list.get(i).getShelfID()).getNode());
             if (distance < min) {
                 min = distance;
                 counter = i;
             }
         }
-        ProductClass node = list.get(counter);
+        productClass node = list.get(counter);
+        // removes the product that was closest from the unsorted list - it has been visited and won't be checked again
         list.remove(counter);
         return node;
     }
@@ -455,6 +461,7 @@ public class shoppingListPlay extends AppCompatActivity {
         return graph[srcShelf][dest];
     }
 
+    // add the options menu to the current page
     public boolean onCreateOptionsMenu(Menu menu) {
         //creates the menu which allows for navigation
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -466,11 +473,11 @@ public class shoppingListPlay extends AppCompatActivity {
         //handles menu clicks
         int itemId = item.getItemId();
         if (itemId == R.id.home) {
-            Intent homePage = new Intent(getApplicationContext(), HomePage.class);
+            Intent homePage = new Intent(getApplicationContext(), com.example.productfinder.homePage.class);
             startActivity(homePage);
             return true;
         } else if (itemId == R.id.ProductSearch) {
-            Intent productSearch = new Intent(getApplicationContext(), ProductSearch.class);
+            Intent productSearch = new Intent(getApplicationContext(), com.example.productfinder.productSearch.class);
             startActivity(productSearch);
             return true;
         } else if (itemId == R.id.ShoppingList) {

@@ -15,14 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="34">
-        <activity android:name=".HomePage" />
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".ProductSearch" />
+        <activity android:name=".homePage" />
+        <activity android:name=".detailActivity" />
+        <activity android:name=".productSearch" />
         <activity android:name=".shoppingList" />
         <activity android:name=".shoppingListPlay" />
         <activity android:name=".createShoppingList" />
         <activity
-            android:name=".MainActivity"
+            android:name=".mainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

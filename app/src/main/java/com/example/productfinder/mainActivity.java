@@ -2,41 +2,25 @@ package com.example.productfinder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class mainActivity extends AppCompatActivity {
 
-    public static ArrayList<ProductClass> productClassList = new ArrayList<ProductClass>();
-    public static ArrayList<ShelfClass> shelfClassList = new ArrayList<ShelfClass>();
-    public static ArrayList<ProductClass> shoppingList = new ArrayList<ProductClass>();
+    // Initiates global variables
+    public static ArrayList<productClass> productClassList = new ArrayList<productClass>();
+    public static ArrayList<shelfClass> shelfClassList = new ArrayList<shelfClass>();
     public static final String shoppingListFileNames = "shoppingListFileNames.txt";
 
-    static int otherTotal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         readShelfData();
     }
 
+    // add the options menu to the current page
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //creates the menu which allows for navigation
@@ -61,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         //handles menu clicks
         int itemId = item.getItemId();
         if (itemId == R.id.home) {
-            Intent homePage = new Intent(getApplicationContext(), HomePage.class);
+            Intent homePage = new Intent(getApplicationContext(), com.example.productfinder.homePage.class);
             startActivity(homePage);
             return true;
         } else if (itemId == R.id.ProductSearch) {
-            Intent productSearch = new Intent(getApplicationContext(), ProductSearch.class);
+            Intent productSearch = new Intent(getApplicationContext(), com.example.productfinder.productSearch.class);
             startActivity(productSearch);
             return true;
         } else if (itemId == R.id.ShoppingList) {
@@ -91,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Read the data into a productClass and add to list of products
 
-                ProductClass productClass = new ProductClass();
+                productClass productClass = new productClass();
                 productClass.setProductID(tokens[0]);
                 productClass.setProductName(tokens[1]);
                 productClass.setShelfRow(tokens[2]);
@@ -117,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Read the data into a shelfClass and add to the list of shelves
 
-                ShelfClass shelfClass = new ShelfClass();
+                shelfClass shelfClass = new shelfClass();
                 shelfClass.setShelfID(Integer.parseInt(tokens[0]));
                 shelfClass.setAisleNo(tokens[1]);
                 shelfClass.setSide(tokens[2]);

@@ -1,6 +1,6 @@
 package com.example.productfinder;
 
-public class ShelfClass {
+public class shelfClass {
     private int shelfID;
     private String aisleNo;
     private String side;
@@ -9,7 +9,7 @@ public class ShelfClass {
     private int ypos;
     private int node;
 
-    public ShelfClass() {
+    public shelfClass() {
         shelfID=0;
         aisleNo="";
         side="";
@@ -18,7 +18,7 @@ public class ShelfClass {
         ypos = 0;
         node = 0;
     }
-    public ShelfClass(int shelfID, String aisleNo, String side, int shelfNo, int xpos, int ypos, int node) {
+    public shelfClass(int shelfID, String aisleNo, String side, int shelfNo, int xpos, int ypos, int node) {
         this.shelfID = shelfID;
         this.aisleNo = aisleNo;
         this.side = side;

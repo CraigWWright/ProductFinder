@@ -7,23 +7,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class ProductAdapter extends ArrayAdapter<ProductClass> {
+public class productAdapter extends ArrayAdapter<productClass> {
 
-    public ProductAdapter(Context context, int resource, List<ProductClass> productList) {
+    public productAdapter(Context context, int resource, List<productClass> productList) {
         super(context, resource, productList);
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ProductClass productClass = getItem(position);
+        // sets values of each cell in product list view
+        productClass productClass = getItem(position);
 
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.product_cell, parent, false);

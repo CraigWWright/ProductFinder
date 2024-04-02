@@ -10,21 +10,20 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class ShoppingListAdapter extends ArrayAdapter<ProductClass> {
+public class shoppingListAdapter extends ArrayAdapter<productClass> {
 
 
-    public ShoppingListAdapter(Context context, int resource, List<ProductClass> productList) {
+    public shoppingListAdapter(Context context, int resource, List<productClass> productList) {
         super(context, resource, productList);
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ProductClass productClass = getItem(position);
+        // sets content for each cell in list
+        productClass productClass = getItem(position);
 
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.create_shopping_list_cell, parent, false);
@@ -37,8 +36,8 @@ public class ShoppingListAdapter extends ArrayAdapter<ProductClass> {
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    // sets productClass isChecked value to correct boolean when the checkbox is clicked
                     productClass.setChecked(isChecked);
-                    Log.d("Checked", String.valueOf(productClass.isChecked()));
                 }
             });
 

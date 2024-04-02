@@ -1,6 +1,6 @@
 package com.example.productfinder;
 
-public class ProductClass {
+public class productClass {
     private String productID;
 
     private String productName;
@@ -10,7 +10,7 @@ public class ProductClass {
     private boolean isChecked;
 
 
-    public ProductClass() {
+    public productClass() {
         productID = "";
         productName = "";
         shelfRow = "";
@@ -18,7 +18,7 @@ public class ProductClass {
         isChecked = false;
     }
 
-    public ProductClass(String anId, String aProductName, String aShelfRow, int aShelfID) {
+    public productClass(String anId, String aProductName, String aShelfRow, int aShelfID) {
         productID = anId;
         productName = aProductName;
         shelfRow = aShelfRow;

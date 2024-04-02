@@ -12,13 +12,9 @@ import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class createShoppingList extends AppCompatActivity {
@@ -27,10 +23,12 @@ public class createShoppingList extends AppCompatActivity {
     private Button submitShoppingListButton;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // sets view
         setContentView(R.layout.create_shopping_list_layout);
 
+        // creates list view of  products - list view also has checkboxes
         createShoppingListView = findViewById(R.id.shoppingListView);
-        ShoppingListAdapter adapter = new ShoppingListAdapter(this, 0, MainActivity.productClassList);
+        shoppingListAdapter adapter = new shoppingListAdapter(this, 0, mainActivity.productClassList);
         createShoppingListView.setAdapter(adapter);
 
         // saves the name of the shopping list
@@ -41,20 +39,23 @@ public class createShoppingList extends AppCompatActivity {
         submitShoppingListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // gets users chosen file name from editText
                 String shoppingListName = enteredFilename.getText().toString();
                 String shoppingListFile = shoppingListName + ".txt";
 
-                ArrayList<ProductClass> createdShoppingList = new ArrayList<ProductClass>();
-                createdShoppingList.clear();
-                for (ProductClass productClass : MainActivity.productClassList) {
+                // creates a shopping list
+                ArrayList<productClass> createdShoppingList = new ArrayList<productClass>();
+                for (com.example.productfinder.productClass productClass : mainActivity.productClassList) {
+                    // adds products to the list if the checkbox has been checked
                     if (productClass.isChecked()) {
                         createdShoppingList.add(productClass);
                     }
                 }
 
+                // saves all products in the shopping list to a file using the chosen file name
                 try {
                     FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
-                    for (ProductClass product : createdShoppingList) {
+                    for (productClass product : createdShoppingList) {
                         fileOutputStream.write((product.getProductID() + "," + product.getProductName() + "," + product.getShelfRow() + "," + product.getShelfID() + "," +"\n").getBytes());
                         product.setChecked(false);
                     }
@@ -68,13 +69,15 @@ public class createShoppingList extends AppCompatActivity {
                 shoppingListName = shoppingListName + ",";
 
                 try {
-                    FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), MainActivity.shoppingListFileNames), true);
+                    FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), mainActivity.shoppingListFileNames), true);
                     fileOutputStream.write(shoppingListName.getBytes());
                     fileOutputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
+                // clears shopping list - used in case of a user creating another shopping list in the instance
+                createdShoppingList.clear();
                 // sets page back to original shopping list layout
                 Intent shoppingList = new Intent(getApplicationContext(), shoppingList.class);
                 startActivity(shoppingList);
@@ -96,8 +99,8 @@ public class createShoppingList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<ProductClass> filteredProducts = new ArrayList<ProductClass>();
-                for (ProductClass productClass: MainActivity.productClassList) {
+                ArrayList<productClass> filteredProducts = new ArrayList<productClass>();
+                for (com.example.productfinder.productClass productClass: mainActivity.productClassList) {
                     //creates array of products which contain text searched by user
                     if (productClass.getProductName().toLowerCase().contains(newText.toLowerCase())){
                         filteredProducts.add(productClass);
@@ -105,7 +108,7 @@ public class createShoppingList extends AppCompatActivity {
                 }
 
                 //displays the filtered products
-                ShoppingListAdapter adapter = new ShoppingListAdapter(getApplicationContext(), 0, filteredProducts);
+                shoppingListAdapter adapter = new shoppingListAdapter(getApplicationContext(), 0, filteredProducts);
                 createShoppingListView.setAdapter(adapter);
 
                 return false;
@@ -113,37 +116,7 @@ public class createShoppingList extends AppCompatActivity {
         });
     }
 
-    public static int[][] createGraph(String matrixString, int rows, int cols) {
-        // used to create distance matrix
-        int[][] graph = new int[rows][cols];
-        String[] values = matrixString.split(",");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                graph[i][j] = Integer.parseInt(values[i * cols + j].trim());
-            }
-        }
-        return graph;
-    }
-
-    public ProductClass findShortest(int[][] graph, int srcShelf, ArrayList<ProductClass> list) {
-        int min = Integer.MAX_VALUE;
-        int counter = 0;
-        for (int i=0; i<list.size(); i++) {
-            int distance = findDistance(graph, srcShelf, MainActivity.shelfClassList.get(list.get(i).getShelfID()).getNode());
-            if (distance < min) {
-                min = distance;
-                counter = i;
-            }
-        }
-        ProductClass node = list.get(counter);
-        list.remove(counter);
-        return node;
-    }
-
-    public int findDistance(int[][] graph, int srcShelf, int dest) {
-        return graph[srcShelf][dest];
-    }
-
+    // add the options menu to the current page
     public boolean onCreateOptionsMenu(Menu menu) {
         //creates the menu which allows for navigation
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -155,11 +128,11 @@ public class createShoppingList extends AppCompatActivity {
         //handles menu clicks
         int itemId = item.getItemId();
         if (itemId == R.id.home) {
-            Intent homePage = new Intent(getApplicationContext(), HomePage.class);
+            Intent homePage = new Intent(getApplicationContext(), com.example.productfinder.homePage.class);
             startActivity(homePage);
             return true;
         } else if (itemId == R.id.ProductSearch) {
-            Intent productSearch = new Intent(getApplicationContext(), ProductSearch.class);
+            Intent productSearch = new Intent(getApplicationContext(), com.example.productfinder.productSearch.class);
             startActivity(productSearch);
             return true;
         } else if (itemId == R.id.ShoppingList) {
