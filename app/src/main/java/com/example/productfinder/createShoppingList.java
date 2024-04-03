@@ -2,6 +2,7 @@ package com.example.productfinder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,13 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class createShoppingList extends AppCompatActivity {
 
@@ -43,44 +48,85 @@ public class createShoppingList extends AppCompatActivity {
                 String shoppingListName = enteredFilename.getText().toString();
                 String shoppingListFile = shoppingListName + ".txt";
 
-                // creates a shopping list
-                ArrayList<productClass> createdShoppingList = new ArrayList<productClass>();
-                for (com.example.productfinder.productClass productClass : mainActivity.productClassList) {
-                    // adds products to the list if the checkbox has been checked
-                    if (productClass.isChecked()) {
-                        createdShoppingList.add(productClass);
-                    }
-                }
 
-                // saves all products in the shopping list to a file using the chosen file name
+                //////////////////////////////
+
+                String input = "";
                 try {
-                    FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
-                    for (productClass product : createdShoppingList) {
-                        fileOutputStream.write((product.getProductID() + "," + product.getProductName() + "," + product.getShelfRow() + "," + product.getShelfID() + "," +"\n").getBytes());
-                        product.setChecked(false);
+                    FileInputStream fis = new FileInputStream(new File(getFilesDir(), mainActivity.shoppingListFileNames));
+                    BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);
+                    StringBuffer stringBuffer = new StringBuffer();
+                    while (bufferedInputStream.available() != 0) {
+                        char c = (char) bufferedInputStream.read();
+                        stringBuffer.append(c);
                     }
-                    fileOutputStream.close();
+                    bufferedInputStream.close();
+                    fis.close();
+                    input = stringBuffer.toString();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                // the name of the file will be saved to a text file containing other file names
-                // this will be used to display all the shopping lists saved in a list view
-                shoppingListName = shoppingListName + ",";
+                // uses standard ListView adapter to show list of shopping lists
+                ArrayList<String> fileNamesList = new ArrayList<>(Arrays.asList(input.split(",")));
+                Boolean duplicateFileName = false;
 
-                try {
-                    FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), mainActivity.shoppingListFileNames), true);
-                    fileOutputStream.write(shoppingListName.getBytes());
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                for (int i = 0; i < fileNamesList.size(); i++) {
+                    if (shoppingListName.equals(fileNamesList.get(i))) {
+                        duplicateFileName = true;
+                    }
                 }
 
-                // clears shopping list - used in case of a user creating another shopping list in the instance
-                createdShoppingList.clear();
-                // sets page back to original shopping list layout
-                Intent shoppingList = new Intent(getApplicationContext(), shoppingList.class);
-                startActivity(shoppingList);
+                if (duplicateFileName) {
+                    Toast.makeText(createShoppingList.this, "There is already a shopping list named " + shoppingListName + ". Please choose another.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    //////////////////////////////
+
+                    // creates a shopping list
+                    ArrayList<productClass> createdShoppingList = new ArrayList<productClass>();
+                    for (com.example.productfinder.productClass productClass : mainActivity.productClassList) {
+                        // adds products to the list if the checkbox has been checked
+                        if (productClass.isChecked()) {
+                            createdShoppingList.add(productClass);
+                        }
+                    }
+
+                    if (createdShoppingList.isEmpty()) {
+                        Toast.makeText(createShoppingList.this, "You have not selected any items.", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        // saves all products in the shopping list to a file using the chosen file name
+                        try {
+                            FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), shoppingListFile));
+                            for (productClass product : createdShoppingList) {
+                                fileOutputStream.write((product.getProductID() + "," + product.getProductName() + "," + product.getShelfRow() + "," + product.getShelfID() + "," + "\n").getBytes());
+                                product.setChecked(false);
+                            }
+                            fileOutputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        // the name of the file will be saved to a text file containing other file names
+                        // this will be used to display all the shopping lists saved in a list view
+                        shoppingListName = shoppingListName + ",";
+
+                        try {
+                            FileOutputStream fileOutputStream = new FileOutputStream(new File(getFilesDir(), mainActivity.shoppingListFileNames), true);
+                            fileOutputStream.write(shoppingListName.getBytes());
+                            fileOutputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        // clears shopping list - used in case of a user creating another shopping list in the instance
+                        createdShoppingList.clear();
+                        // sets page back to original shopping list layout
+                        Intent shoppingList = new Intent(getApplicationContext(), shoppingList.class);
+                        startActivity(shoppingList);
+                    }
+                }
             }
         });
         // allows for searching for products when creating the shopping list
