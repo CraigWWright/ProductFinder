@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.jsibbold.zoomage.ZoomageView;
 
-public class detailActivity extends AppCompatActivity {
+public class productSearchDetail extends AppCompatActivity {
 
     ZoomageView simpleImageView;
     productClass selectedProduct;

@@ -9,13 +9,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class productAdapter extends ArrayAdapter<productClass> {
+public class productSearchAdapter extends ArrayAdapter<productClass> {
 
-    public productAdapter(Context context, int resource, List<productClass> productList) {
+    public productSearchAdapter(Context context, int resource, List<productClass> productList) {
         super(context, resource, productList);
     }
-
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // sets values of each cell in product list view

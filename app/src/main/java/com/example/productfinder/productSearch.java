@@ -24,8 +24,8 @@ public class productSearch extends AppCompatActivity {
         setContentView(R.layout.product_search_layout);
 
         setUpList();
-        setUpOnclickListener();
         initSearchWidgets();
+        setUpOnclickListener();
     }
 
 
@@ -34,7 +34,7 @@ public class productSearch extends AppCompatActivity {
         // creates ListView using productAdapter class
         productListView = (ListView) findViewById(R.id.productListView);
 
-        productAdapter adapter = new productAdapter(getApplicationContext(), 0, mainActivity.productClassList);
+        productSearchAdapter adapter = new productSearchAdapter(getApplicationContext(), 0, mainActivity.productClassList);
         productListView.setAdapter(adapter);
     }
 
@@ -47,7 +47,7 @@ public class productSearch extends AppCompatActivity {
             {
                 // Receives the product clicked on
                 productClass selectProduct = (productClass) (productListView.getItemAtPosition(position));
-                Intent showDetail = new Intent(getApplicationContext(), detailActivity.class);
+                Intent showDetail = new Intent(getApplicationContext(), productSearchDetail.class);
                 // shows the DetailActivity.java which shows the products location and shop image.
                 showDetail.putExtra("id",selectProduct.getProductID());
                 startActivity(showDetail);
@@ -78,7 +78,7 @@ public class productSearch extends AppCompatActivity {
                 }
 
                 // displays the filtered products
-                productAdapter adapter = new productAdapter(getApplicationContext(), 0, filteredProducts);
+                productSearchAdapter adapter = new productSearchAdapter(getApplicationContext(), 0, filteredProducts);
                 productListView.setAdapter(adapter);
 
                 return false;
